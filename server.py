@@ -1,14 +1,17 @@
-"""CleanTown waste-photo recognition API using Ultralytics YOLO + OpenCV/Pillow.
+"""CleanTown waste-photo recognition API using Ultralytics YOLO + Pillow.
 
 The pretrained COCO model detects common objects, not every waste type. For
 items outside its label set (e.g. batteries, cardboard, used tissue), return
 uncertain and let the resident choose manually. This is a hackathon prototype;
 add authentication, rate limiting, and deployment controls before public use.
 """
+import io
+import mimetypes
 import os
+import threading
 from pathlib import Path
 
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, abort, jsonify, request, send_from_directory
 from PIL import Image, UnidentifiedImageError
 from ultralytics import YOLO
 
@@ -16,11 +19,18 @@ ROOT = Path(__file__).resolve().parent
 MODEL_NAME = os.environ.get("CLEANTOWN_YOLO_MODEL", "yolo11n.pt")
 MAX_IMAGE_BYTES = 12 * 1024 * 1024
 ALLOWED_MIME = {"image/jpeg", "image/png", "image/webp", "image/gif", "image/bmp"}
-CATEGORIES = {"paper", "plastic-metal", "glass", "food", "battery", "ewaste", "general", "bulky", "uncertain"}
+# Only the app's own front-end files are served. Serving ROOT wholesale would also
+# expose server.py, the model weights and the .git folder to anyone on the network.
+STATIC_FILES = {"index.html", "app.css", "app.js", "sw.js", "manifest.webmanifest", "ai-config.js", "supabase-config.js"}
+ICON_FILES = {"icon.svg", "icon-192.png", "icon-512.png", "icon-maskable-512.png"}
 
-app = Flask(__name__, static_folder=str(ROOT), static_url_path="")
+mimetypes.add_type("application/manifest+json", ".webmanifest")
+mimetypes.add_type("text/javascript", ".js")
+
+app = Flask(__name__, static_folder=None)
 app.config["MAX_CONTENT_LENGTH"] = MAX_IMAGE_BYTES + 1024 * 1024
 model = None
+model_lock = threading.Lock()
 
 # COCO class names supported by the generic pretrained YOLO detector.
 CLASS_CATEGORY = {
@@ -48,14 +58,28 @@ ADVICE = {
 
 def get_model():
     global model
-    if model is None:
-        model = YOLO(MODEL_NAME)  # downloads the small pretrained weights on first run
+    with model_lock:
+        if model is None:
+            model = YOLO(MODEL_NAME)  # downloads the small pretrained weights on first run
     return model
 
 
 @app.get("/")
 def index():
     return send_from_directory(ROOT, "index.html")
+
+
+@app.get("/<path:filename>")
+def static_files(filename):
+    if filename in STATIC_FILES:
+        response = send_from_directory(ROOT, filename)
+        if filename == "sw.js":
+            response.headers["Cache-Control"] = "no-cache"
+        return response
+    folder, _, name = filename.partition("/")
+    if folder == "icons" and name in ICON_FILES:
+        return send_from_directory(ROOT / "icons", name)
+    abort(404)
 
 
 @app.get("/api/health")
@@ -71,6 +95,11 @@ def health():
                         "error": str(exc)}), 503
 
 
+@app.errorhandler(413)
+def too_large(_error):
+    return jsonify({"error": "Image must be 12 MB or smaller."}), 413
+
+
 @app.post("/api/classify")
 def classify():
     upload = request.files.get("image")
@@ -84,7 +113,6 @@ def classify():
     if len(image_bytes) > MAX_IMAGE_BYTES:
         return jsonify({"error": "Image must be 12 MB or smaller."}), 413
     try:
-        import io
         image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
     except (UnidentifiedImageError, OSError):
         return jsonify({"error": "The uploaded file is not a readable image."}), 400
@@ -104,7 +132,9 @@ def classify():
             item = chosen["name"].replace("_", " ").title()
             confidence = chosen["confidence"]
         else:
-            category, item, confidence = "uncertain", "No supported waste object detected", (detections[0]["confidence"] if detections else 0.0)
+            category = "uncertain"
+            item = detections[0]["name"].title() if detections else "No supported waste object detected"
+            confidence = detections[0]["confidence"] if detections else 0.0
         return jsonify({
             "category": category, "confidence": confidence, "item": item,
             "advice": ADVICE[category], "model": MODEL_NAME, "provider": "Ultralytics YOLO",
@@ -120,4 +150,4 @@ if __name__ == "__main__":
     host = os.environ.get("CLEANTOWN_HOST", "127.0.0.1")
     port = int(os.environ.get("CLEANTOWN_PORT", "8787"))
     print(f"CleanTown serving at http://{host}:{port} using Ultralytics YOLO model {MODEL_NAME}")
-    app.run(host=host, port=port, debug=False)
+    app.run(host=host, port=port, debug=False, threaded=True)

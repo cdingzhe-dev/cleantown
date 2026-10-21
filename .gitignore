@@ -1,0 +1,7 @@
+# Local tooling output
+graphify-out/
+.impeccable/questions/
+.impeccable/mocks/
+.impeccable/review/
+__pycache__/
+*.pyc
