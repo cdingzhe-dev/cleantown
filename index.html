@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123c32">
+<meta name="description" content="CleanTown for Sime Darby Township: report waste issues, track progress, and learn responsible disposal.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<title>CleanTown — Sime Darby Township</title>
+
+<style>
+:root{--green:#123c32;--green2:#20563e;--mint:#ddf4ce;--bg:#f5f7f4;--card:#fff;--text:#17241e;--muted:#65736b;--line:#e1e8e2;--amber:#a86612;--red:#b83a35;--blue:#2e6f9e;--shadow:0 8px 24px rgba(20,48,34,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #8abf76;outline-offset:2px}.shell{max-width:1180px;margin:auto;padding:22px}.hero{background:linear-gradient(120deg,#123c32,#23664b);color:white;border-radius:22px;padding:28px 30px;display:flex;justify-content:space-between;gap:20px;align-items:center;box-shadow:var(--shadow)}.brand{display:flex;gap:12px;align-items:center}.logo{width:48px;height:48px;border-radius:14px;background:#d7f4a8;color:#123c32;display:grid;place-items:center;font-size:27px}.eyebrow{font-size:11px;letter-spacing:.12em;font-weight:800;color:#d1e7d9}.hero h1{font-size:clamp(28px,4vw,42px);line-height:1.1;margin:15px 0 8px}.hero p{color:#d9e9df;margin:0;max-width:600px}.demo-pill{border:1px solid #6a9b82;border-radius:99px;padding:6px 11px;font-size:12px;white-space:nowrap}.nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.nav button{border:1px solid var(--line);background:white;color:var(--text);border-radius:12px;padding:11px 15px;font-weight:650}.nav button.active{background:var(--mint);border-color:#c6e5b5;color:var(--green2)}main{min-height:400px}.page{display:none}.page.active{display:block}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:20px 0 14px}.section-head h2{margin:0;font-size:24px}.muted{color:var(--muted)}.small{font-size:13px}.grid{display:grid;gap:14px}.stats{grid-template-columns:repeat(4,minmax(0,1fr))}.two{grid-template-columns:1fr 1fr}.card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:var(--shadow);min-width:0}.stat-label{font-size:13px;color:var(--muted)}.stat-num{font-size:31px;font-weight:800;letter-spacing:-.03em;margin-top:7px}.stat-icon{font-size:22px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.btn{border:0;background:var(--green);color:white;border-radius:11px;padding:11px 15px;font-weight:700}.btn:hover{background:#1b5340}.btn.secondary{background:white;color:var(--green);border:1px solid var(--line)}.btn.light{background:var(--mint);color:var(--green)}.btn.danger{background:#fff0ef;color:var(--red);border:1px solid #f0d2d0}.btn:disabled{opacity:.5;cursor:not-allowed}.list{display:grid;gap:10px}.report{border:1px solid var(--line);border-radius:14px;padding:15px;background:white}.report-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.report h3{font-size:16px;margin:2px 0}.tag{display:inline-flex;align-items:center;border-radius:99px;padding:4px 9px;font-size:12px;font-weight:750;background:#fff3d9;color:#80520e;white-space:nowrap}.tag.progress{background:#e5f1fb;color:#245e86}.tag.resolved{background:#e0f4e6;color:#22653b}.field{display:grid;gap:6px;margin:13px 0}.field label{font-weight:700;font-size:14px}.field input,.field textarea,.field select,.toolbar input,.toolbar select{width:100%;padding:11px 12px;border:1px solid #ccd7ce;border-radius:10px;background:white;color:var(--text)}textarea{resize:vertical;min-height:100px}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.choice{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);background:white;border-radius:12px;padding:12px;cursor:pointer}.choice:has(input:checked){border-color:#5d9a65;background:#f0f8ec}.choice input{margin-top:5px;accent-color:var(--green)}.choice strong{display:block}.choice span{font-size:12px;color:var(--muted)}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.toolbar>*{flex:1;min-width:160px}.empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed #c8d5ca;border-radius:14px}.notice{padding:12px 14px;border-radius:11px;background:#e4f5e7;color:#205b35;margin:12px 0}.error{padding:12px 14px;border-radius:11px;background:#fff0ef;color:#a62e2e;margin:12px 0}.maplist{display:grid;gap:10px}.hotspot{display:flex;gap:12px;align-items:flex-start}.pin{font-size:24px}.guide{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.guide-item{padding:15px;border:1px solid var(--line);border-radius:14px;background:white;text-align:left;color:var(--text)}.guide-item:hover{border-color:#78a97d}.guide-item strong{display:block;margin:5px 0}.footer{text-align:center;color:var(--muted);font-size:12px;padding:26px 0 12px}.footer strong{color:var(--green)}.hidden{display:none!important}.progressbar{height:8px;background:#e8eee8;border-radius:99px;overflow:hidden;margin-top:9px}.progressbar span{display:block;height:100%;background:#66a66d;border-radius:99px}.row{display:flex;gap:10px;align-items:center}.spacer{flex:1}.detail{margin-top:10px;padding:10px;background:#f5f8f4;border-radius:10px}.count{font-variant-numeric:tabular-nums}.pill{border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:white;font-size:12px}
+@media(max-width:760px){.shell{padding:13px}.hero{padding:22px;align-items:flex-start}.demo-pill{display:none}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}.section-head{align-items:flex-start}.choices,.guide{grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.nav button{padding:10px 5px;font-size:12px}.report-top{align-items:flex-start}.card{padding:15px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+.login-overlay{position:fixed;inset:0;z-index:1000;background:linear-gradient(135deg,#0e342b,#1f6548);display:flex;align-items:center;justify-content:center;padding:22px}
+.login-panel{width:min(100%,440px);background:#fff;border-radius:24px;padding:30px;box-shadow:0 24px 80px rgba(0,0,0,.22)}
+.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.login-logo{width:50px;height:50px;display:grid;place-items:center;border-radius:15px;background:#d7f4a8;color:#123c32;font-size:28px}
+.login-kicker{font-size:11px;letter-spacing:.13em;font-weight:800;color:#47735b}
+.login-panel h2{font-size:29px;line-height:1.15;margin:0 0 8px;color:#17241e}
+.login-subtitle{margin:0 0 22px;color:#65736b;font-size:14px}
+.login-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:#f0f4ef;border-radius:12px;padding:5px;margin:18px 0}
+.login-tabs button{border:0;background:transparent;padding:10px;border-radius:9px;font-weight:750;color:#65736b}
+.login-tabs button.active{background:white;color:#123c32;box-shadow:0 2px 7px #123c3212}
+.login-field{display:grid;gap:6px;margin:14px 0}
+.login-field label{font-size:13px;font-weight:750;color:#26382d}
+.login-field input,.login-field select{width:100%;padding:12px 13px;border:1px solid #ccd7ce;border-radius:11px;background:#fff;color:#17241e}
+.login-password-wrap{display:flex;gap:8px}
+.login-password-wrap input{flex:1;min-width:0}
+.login-password-wrap button{border:1px solid #ccd7ce;background:#fff;border-radius:10px;padding:0 12px;color:#20563e;font-weight:700}
+.login-submit{width:100%;border:0;border-radius:11px;background:#123c32;color:#fff;padding:13px 16px;font-weight:800;margin-top:8px}
+.login-submit:hover{background:#20563e}
+.login-help{font-size:12px;color:#65736b;text-align:center;margin:16px 0 0}
+.login-message{font-size:13px;padding:10px 12px;border-radius:10px;margin:10px 0;background:#e4f5e7;color:#205b35}
+.login-message.error{background:#fff0ef;color:#a62e2e}
+.login-demo-note{font-size:12px;background:#f5f8f4;border:1px solid #e1e8e2;border-radius:11px;padding:11px;color:#53655a;margin-top:15px}
+body.login-locked{overflow:hidden}
+@media(max-width:480px){.login-overlay{padding:14px}.login-panel{padding:23px 20px;border-radius:20px}.login-panel h2{font-size:26px}}
+
+
+/* Interactive township hotspot map */
+.hotspot-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);gap:14px;align-items:start}
+.map-card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:14px;box-shadow:var(--shadow);min-width:0}
+.map-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.map-toolbar select{padding:9px 10px;border:1px solid #ccd7ce;border-radius:10px;background:#fff;color:var(--text);max-width:100%}
+.map-legend{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 2px}
+.map-legend span{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)}
+.legend-dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.static-township,.static-map-location{display:block;padding:11px 12px;border:1px solid #ccd7ce;border-radius:10px;background:#f3f7f1;color:var(--green2);font-weight:700}.static-map-location{font-size:13px;white-space:nowrap}.township-map{width:100%;height:470px;display:block;background:#eef5e9;border-radius:13px;touch-action:manipulation}.generated-map-svg{width:100%;height:100%;display:block;border-radius:13px;cursor:crosshair}.generated-map-svg text{font-family:system-ui,sans-serif;pointer-events:none}.generated-map-svg .map-pin{cursor:pointer;outline:none}.generated-map-svg .map-pin:focus .pin-core,.generated-map-svg .map-pin:hover .pin-core{stroke:#123c32;stroke-width:4}.generated-map-svg .map-pin.selected .pin-halo{opacity:.34}.generated-map-svg .map-pin text{font-size:11px;font-weight:900;fill:#fff;text-anchor:middle;dominant-baseline:central}.facility-map .generated-map-svg{min-height:390px}
+.map-report-pin{display:flex;align-items:center;justify-content:center;border:2px solid white;border-radius:50%;box-shadow:0 2px 8px #17241e55;color:#fff;font-weight:900;font-size:12px}.location-coords{display:grid;grid-template-columns:1fr 1fr;gap:10px}.location-coords input{width:100%;padding:11px 12px;border:1px solid #ccd7ce;border-radius:10px}.facility-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,1fr);gap:14px;align-items:start}
+.facility-map{width:100%;height:480px;border-radius:13px;background:#edf4e9}
+.facility-controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.facility-controls select{flex:1;min-width:150px;padding:10px;border:1px solid #ccd7ce;border-radius:10px;background:#fff;color:var(--text)}
+.facility-results{display:grid;gap:10px}
+.facility-item{border:1px solid var(--line);background:#fff;border-radius:12px;padding:13px;text-align:left;color:var(--text);width:100%}
+.facility-item:hover,.facility-item.active{border-color:#5d9a65;background:#f5fbf2}
+.facility-item small{display:block;color:var(--muted);margin-top:4px}
+.facility-badge{display:inline-block;border-radius:99px;padding:3px 8px;background:#e4f5e7;color:#205b35;font-size:11px;font-weight:800;margin-bottom:5px}
+.facility-badge.bin{background:#fff0d8;color:#87520b}
+@media(max-width:760px){.facility-layout{grid-template-columns:1fr}.facility-map{height:390px}}
+.map-attribution-note{font-size:11px;color:var(--muted);margin-top:7px}
+.map-pin{cursor:pointer;outline:none}
+.map-pin circle.pin-halo{fill:currentColor;opacity:.16}
+.map-pin circle.pin-core{stroke:#fff;stroke-width:2.5}
+.map-pin text{font-size:11px;font-weight:800;fill:#fff;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.map-pin:focus circle.pin-core,.map-pin:hover circle.pin-core{stroke:#123c32;stroke-width:4}
+.map-pin.selected circle.pin-halo{opacity:.34}
+.map-info{margin-top:10px;padding:13px;border-radius:12px;background:#f5f8f4;border:1px solid #e1e8e2}
+.map-info h3{margin:0 0 5px;font-size:16px}
+.map-info p{margin:5px 0;font-size:13px}
+.severity-badge{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:4px 9px;font-size:12px;font-weight:800}
+.severity-red{background:#fde5e3;color:#9d2924}
+.severity-orange{background:#ffead7;color:#9a4a09}
+.severity-yellow{background:#fff5c7;color:#806300}
+.severity-green{background:#dff3e3;color:#22653b}
+.map-list{display:grid;gap:8px;max-height:590px;overflow:auto}
+.map-list-item{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--line);border-radius:12px;background:white;text-align:left;color:var(--text);width:100%}
+.map-list-item.active{border-color:#5d9a65;background:#f0f8ec}
+.map-list-item .severity-dot{width:12px;height:12px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.map-list-item strong{display:block;font-size:13px}
+.map-list-item small{display:block;color:var(--muted);margin-top:3px}
+.map-note{font-size:12px;color:var(--muted);margin-top:10px}
+@media(max-width:760px){.hotspot-layout{grid-template-columns:1fr}.map-list{max-height:350px}.map-toolbar select{flex:1}}
+
+</style>
+</head>
+<body>
+
+<div id="loginOverlay" class="login-overlay" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="login-panel">
+    <div class="login-brand">
+      <div class="login-logo" aria-hidden="true">♻</div>
+      <div><div class="login-kicker">SIME DARBY TOWNSHIP</div><strong style="font-size:19px;color:#123c32">CleanTown</strong></div>
+    </div>
+    <h2 id="loginTitle">Welcome back</h2>
+    <p class="login-subtitle">Sign in to help keep your neighbourhood clean.</p>
+    <div class="login-tabs" role="tablist" aria-label="Account type">
+      <button type="button" class="active" data-login-role="resident" role="tab" aria-selected="true">Resident</button>
+      <button type="button" data-login-role="manager" role="tab" aria-selected="false">Management</button>
+    </div>
+    <form id="loginForm">
+      <div class="login-field"><label for="loginEmail">Email address</label><input id="loginEmail" name="email" type="email" autocomplete="username" required placeholder="you@example.com"></div>
+      <div class="login-field"><label for="loginPassword">Password</label><div class="login-password-wrap"><input id="loginPassword" name="password" type="password" autocomplete="current-password" required minlength="4" placeholder="Enter your password"><button type="button" id="togglePassword" aria-label="Show password">Show</button></div></div>
+      <div class="login-field"><label>Township</label><div class="static-township" aria-label="Township: Sime Darby Township">Sime Darby Township</div></div>
+      <div id="loginMessage" aria-live="polite"></div>
+      <button class="login-submit" type="submit">Sign in →</button>
+    </form>
+    <div class="login-demo-note"><strong>Hackathon demo:</strong> Enter any valid email and a password of at least 4 characters. This UI simulates sign-in only; it does not authenticate an account.</div>
+    <p class="login-help">Cleaner streets. Smarter communities. 🌱</p>
+  </div>
+</div>
+
+<div class="shell">
+<header class="hero">
+ <div>
+  <div class="brand"><div class="logo" aria-hidden="true">♻</div><div><div class="eyebrow">SIME DARBY TOWNSHIP · SMART WASTE</div><strong>CleanTown</strong></div></div>
+  <h1>A cleaner Sime Darby<br>starts here.</h1>
+  <p>Report problems, track collection, and discover better ways to recycle — all in one place.</p>
+ </div>
+ <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="demo-pill" id="connectionBadge">Local demo · not synced</span><button class="btn secondary" id="logoutBtn" type="button" style="display:none">Sign out</button></div>
+</header>
+<nav class="nav" aria-label="Main navigation">
+ <button class="active" data-page="dashboard">⌂ Overview</button>
+ <button data-page="truckSchedule">🚛 Truck timetable</button>
+ <button data-page="report">＋ Report issue</button>
+ <button data-page="tracking">▤ Track reports</button>
+ <button data-page="recycling">♻ Recycling</button>
+ <button data-page="hotspots">⌖ Hotspots</button>
+ <button data-page="facilities">🧭 Find facilities</button>
+ <button data-page="admin">⚙ Management</button>
+</nav>
+<main>
+<section id="dashboard" class="page active">
+ <div class="section-head"><div><h2>Neighbourhood overview</h2><div class="muted small">A snapshot of Sime Darby Township waste reports</div></div><span class="pill">Demo data</span></div>\n  <div class="notice">Cloud sync is optional. Configure Supabase to share resident reports and township facility updates across devices; without configuration, data stays in this browser.</div>
+ <div class="grid stats">
+  <div class="card"><div class="row"><span class="stat-icon">⚠️</span><span class="spacer"></span><span class="stat-label">Open</span></div><div class="stat-num count" id="statOpen">2</div><div class="stat-label">Unresolved reports</div></div>
+  <div class="card"><div class="row"><span class="stat-icon">✓</span><span class="spacer"></span><span class="stat-label">Completed</span></div><div class="stat-num count" id="statResolved">1</div><div class="stat-label">Resolved reports</div></div>
+  <div class="card"><div class="row"><span class="stat-icon">🚛</span><span class="spacer"></span><span class="stat-label">In progress</span></div><div class="stat-num count" id="statProgress">1</div><div class="stat-label">Being addressed</div></div>
+  <div class="card"><div class="row"><span class="stat-icon">🌱</span><span class="spacer"></span><span class="stat-label">Guide</span></div><div class="stat-num">6</div><div class="stat-label">Disposal guide items</div></div>
+ </div>
+ <div class="grid two" style="margin-top:14px">
+  <div class="card"><h3 style="margin-top:0">Quick actions</h3><p class="muted small">See a waste issue? Help your community get it noticed.</p><div class="actions"><button class="btn" data-go="report">＋ Report a problem</button><button class="btn secondary" data-go="recycling">Find a recycling guide</button><button class="btn light" data-go="facilities">🧭 Find nearest bin or centre</button></div></div>
+  <div class="card"><h3 style="margin-top:0">How CleanTown works</h3><div class="list small"><div>📍 <strong>Report</strong> — share the location and issue.</div><div>🧭 <strong>Prioritise</strong> — identify recurring hotspots.</div><div>🚛 <strong>Resolve</strong> — update the report's status.</div><div>♻ <strong>Prevent</strong> — improve recycling habits.</div></div></div>
+ </div>
+ <div class="section-head"><div><h2>Recent activity</h2><div class="muted small">Latest reports from Sime Darby Township (demo data)</div></div><button class="btn secondary" data-go="tracking">View all</button></div>
+ <div id="recentReports" class="list"></div>
+</section>
+
+<section id="truckSchedule" class="page">
+ <div class="section-head"><div><h2>Garbage truck timetable</h2><div class="muted small">Planned collection times for Sime Darby Township · Malaysia time (MYT)</div></div><span class="pill">Demo schedule</span></div>
+ <div class="notice">Collection times below are illustrative until township management confirms the real routes. Enable notifications on this device to receive a reminder 24 hours before a scheduled collection. Browser push requires HTTPS and notification permission.</div>
+ <div class="card" style="margin-bottom:14px"><div class="row" style="flex-wrap:wrap;align-items:center"><div><h3 style="margin:0 0 5px">Collection reminders</h3><div class="muted small" id="truckReminderStatus">Notifications are not enabled on this device.</div></div><span class="spacer"></span><button class="btn" id="enableTruckReminders" type="button">🔔 Enable reminders</button></div></div>
+ <div id="truckScheduleList" class="list"></div>
+ <div class="card" style="margin-top:14px"><h3 style="margin-top:0">Before collection day</h3><div class="list small"><div>🗑 Place tied rubbish bags in the designated collection point.</div><div>🚗 Keep access roads and collection areas clear.</div><div>♻ Separate recyclable items where your service accepts them.</div><div>⚠️ Do not leave sharp objects or hazardous waste loose in ordinary bags.</div></div></div>
+</section>
+
+<section id="report" class="page">
+ <div class="section-head"><div><h2>Report a waste problem</h2><div class="muted small">Help the community team understand what needs attention.</div></div></div>
+ <div class="card" style="max-width:760px">
+  <div id="reportMessage" aria-live="polite"></div>
+  <form id="reportForm">
+   <div class="field"><label>Problem category *</label>
+    <div class="choices">
+     <label class="choice"><input type="radio" name="category" value="Illegal dumping" checked><span><strong>Illegal dumping</strong><span>Waste left in a public area</span></span></label>
+     <label class="choice"><input type="radio" name="category" value="Overflowing bin"><span><strong>Overflowing bin</strong><span>Bin full or rubbish spilling out</span></span></label>
+     <label class="choice"><input type="radio" name="category" value="Missed collection"><span><strong>Missed collection</strong><span>Scheduled collection did not happen</span></span></label>
+     <label class="choice"><input type="radio" name="category" value="Recycling issue"><span><strong>Recycling issue</strong><span>Sorting or recycling station problem</span></span></label>
+    </div>
+   </div>
+   <div class="field"><label for="location">Location or landmark *</label><input id="location" name="location" maxlength="140" required placeholder="e.g. Block B, beside the playground"></div>
+   <div class="field"><label>Map pin (recommended)</label><div class="muted small">Use your device location, or enter coordinates if known. Reports without coordinates still save and can be tracked, but will not have a map pin.</div><div class="location-coords"><div><label class="small" for="reportLat">Latitude</label><input id="reportLat" name="lat" type="number" step="any" min="-90" max="90" placeholder="e.g. 3.1900"></div><div><label class="small" for="reportLng">Longitude</label><input id="reportLng" name="lng" type="number" step="any" min="-180" max="180" placeholder="e.g. 101.5100"></div></div><div class="actions"><button class="btn secondary" type="button" id="useMyLocationBtn">◎ Use my current location</button></div><div id="locationMessage" class="muted small" aria-live="polite"></div></div>
+   <div class="field"><label for="details">Describe the issue *</label><textarea id="details" name="details" maxlength="1000" required placeholder="What happened? Add any useful details."></textarea></div>
+   <div class="field"><label for="photo">Photo evidence (optional)</label><input id="photo" name="photo" type="file" accept="image/*"><span class="muted small">For this local prototype, the selected photo is not uploaded or saved.</span></div>
+   <button class="btn" type="submit">Submit report →</button>
+  </form>
+ </div>
+</section>
+
+<section id="tracking" class="page">
+ <div class="section-head"><div><h2>Track waste reports</h2><div class="muted small">Search reports and follow their progress.</div></div><button class="btn" data-go="report">＋ New report</button></div>
+ <div class="toolbar"><input id="searchReports" placeholder="Search ID, category or location…" aria-label="Search reports"><select id="statusFilter" aria-label="Filter by status"><option>All statuses</option><option>Submitted</option><option>In progress</option><option>Resolved</option></select></div>
+ <div id="allReports" class="list"></div>
+</section>
+
+<section id="recycling" class="page">
+ <div class="section-head"><div><h2>Recycling assistant</h2><div class="muted small">Select an item for suggested disposal guidance.</div></div></div>
+ <div class="card" id="wasteVisionCard" style="margin-bottom:14px;background:#f5faf2">
+  <h3 style="margin-top:0">📸 Identify waste from a photo</h3>
+  <p class="small muted">Take a picture with your phone camera or choose an existing image. CleanTown can send it to an AI vision endpoint you configure, then suggest a waste category and suitable disposal guidance.</p>
+  <div class="field"><label for="wastePhoto">Take or upload a garbage photo</label><input id="wastePhoto" type="file" accept="image/*" capture="environment"></div>
+  <div id="wastePhotoPreviewWrap" class="hidden" style="margin:10px 0"><img id="wastePhotoPreview" alt="Selected waste photo preview" style="max-width:100%;max-height:280px;object-fit:contain;border-radius:12px;border:1px solid var(--line)"></div>
+  <div class="field"><label for="wasteManualCategory">If AI recognition is unavailable, choose the category yourself</label><select id="wasteManualCategory"><option value="">Choose a waste category…</option><option value="paper">Paper / cardboard</option><option value="plastic-metal">Plastic / metal packaging</option><option value="glass">Glass</option><option value="food">Food scraps</option><option value="battery">Battery</option><option value="ewaste">Electrical appliance / e-waste</option><option value="general">General or contaminated waste</option><option value="bulky">Bulky waste</option><option value="uncertain">Not sure / mixed waste</option></select></div>
+  <div class="actions"><button class="btn" id="recognizeWasteBtn" type="button">✨ Analyse photo</button><button class="btn secondary" id="useManualCategoryBtn" type="button">Use selected category</button></div>
+  <div id="wasteVisionMessage" class="notice" aria-live="polite">AI recognition uses the local CleanTown vision bridge when the app is served by server.py and Ollama is running. You can still choose a category manually if the model is unavailable.</div>
+  <div id="wasteVisionResult" class="detail hidden" aria-live="polite"></div>
+ </div>
+ <div class="card">
+  <div class="field"><label for="searchGuide">Search waste items</label><input id="searchGuide" placeholder="Try bottle, cardboard, battery…"></div>
+  <div id="guideList" class="guide"></div>
+  <div id="guideDetail" class="detail hidden" aria-live="polite"></div>
+  <div id="ewasteInfoPanel" class="card hidden" style="margin-top:14px;background:#f7fbf5;box-shadow:none">
+   <h3 style="margin-top:0">🔌 Where to take electrical & electronic waste (e-waste)</h3>
+   <p class="small">Old phones, computers, TVs, refrigerators and other electrical appliances should go to a registered or authorised e-waste collector—not into ordinary rubbish or mixed recycling bins.</p>
+   <p class="small"><strong>Official Malaysia locator:</strong> Search by town, postcode or state to check nearby registered collection points, accepted items and contact details.</p>
+   <p><a href="https://ewaste.doe.gov.my/index.php/about/list-of-collectors/" target="_blank" rel="noopener noreferrer">Find official e-waste collection centres ↗</a></p>
+   <div class="list small ewaste-points">
+    <article class="report"><div class="report-top"><div><h4>1. A Five Stars Metals Sdn. Bhd. — Shah Alam</h4><div class="small muted">Lot PT 38181, Jalan Masyhur 25/50, Taman Sri Muda, Seksyen 25, 40400 Shah Alam, Selangor</div></div><span class="tag resolved">DOE listed</span></div><p>Household appliances listed include washing machines, televisions, air conditioners, refrigerators, computers and mobile phones. Mon–Sat, 8am–5pm. Call 016-2173331 / 012-2173331.</p><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=A+Five+Stars+Metals+Jalan+Masyhur+25%2F50+Shah+Alam">Directions / search map ↗</a></article>
+    <article class="report"><div class="report-top"><div><h4>2. Acson Malaysia Sales & Service — Petaling Jaya</h4><div class="small muted">No. 7A, Jalan 13/4, Seksyen 13, 46200 Petaling Jaya, Selangor</div></div><span class="tag progress">Air conditioners</span></div><p>DOE listing specifies air conditioners. Mon–Fri, 8am–5:30pm. Call 03-7964 8200 before visiting.</p><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Acson+Malaysia+7A+Jalan+13%2F4+Petaling+Jaya">Directions / search map ↗</a></article>
+    <article class="report"><div class="report-top"><div><h4>3. 3CAT Sdn. Bhd. — Plaza Low Yat, Kuala Lumpur</h4><div class="small muted">Lot UG-039 & 40, UG Floor, Plaza Low Yat, Jalan Bintang, Bukit Bintang, 55100 Kuala Lumpur</div></div><span class="tag progress">IT & phones</span></div><p>Listed for computers/laptops and mobile phones. Listed hours Mon–Sun, 10am–10pm. Call 011-6953 3228 before visiting.</p><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=3CAT+Plaza+Low+Yat+Kuala+Lumpur">Directions / search map ↗</a></article>
+    <article class="report"><div class="report-top"><div><h4>4. Grand Senheng Setia Alam</h4><div class="small muted">Setia Alam, Selangor — check exact branch address in the official directory</div></div><span class="tag">Confirm first</span></div><p>Named as an e-waste collection point in the DOE directory. Call the branch to confirm whether your specific appliance is accepted and its current collection arrangements.</p><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Grand+Senheng+Setia+Alam">Find branch on map ↗</a></article>
+    <article class="report"><div class="report-top"><div><h4>5. Grand Senheng Shah Alam 105</h4><div class="small muted">Shah Alam, Selangor — confirm branch address</div></div><span class="tag">Confirm first</span></div><p>Named as an e-waste collection point in the DOE directory. Accepted appliance types and current collection arrangements must be confirmed.</p><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Grand+Senheng+Shah+Alam+105">Find branch on map ↗</a></article>
+    <article class="report"><div class="report-top"><div><h4>6. Grand Senheng Klang Bukit Tinggi</h4><div class="small muted">Bukit Tinggi, Klang, Selangor — confirm branch address</div></div><span class="tag">Confirm first</span></div><p>Named as an e-waste collection point in the DOE directory. Call ahead to verify appliance eligibility and drop-off arrangements.</p><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Grand+Senheng+Klang+Bukit+Tinggi">Find branch on map ↗</a></article>
+    <article class="report"><div class="report-top"><div><h4>7. Senheng Kelana Jaya</h4><div class="small muted">Kelana Jaya, Selangor — confirm branch address</div></div><span class="tag">Confirm first</span></div><p>Named as an e-waste collection point in the DOE directory. Confirm accepted appliance types and current collection arrangements before travel.</p><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Senheng+Kelana+Jaya">Find branch on map ↗</a></article>
+    <article class="report"><div class="report-top"><div><h4>8. Senheng Bandar Puteri Puchong</h4><div class="small muted">Bandar Puteri Puchong, Selangor — confirm branch address</div></div><span class="tag">Confirm first</span></div><p>Named as an e-waste collection point in the DOE directory. Confirm accepted appliance types and current collection arrangements before travel.</p><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Senheng+Bandar+Puteri+Puchong">Find branch on map ↗</a></article>
+    <article class="report"><div class="report-top"><div><h4>9. Senheng USJ Taipan</h4><div class="small muted">USJ Taipan, Subang Jaya, Selangor — confirm branch address</div></div><span class="tag">Confirm first</span></div><p>Named as an e-waste collection point in the DOE directory. Confirm accepted appliance types and current collection arrangements before travel.</p><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Senheng+USJ+Taipan">Find branch on map ↗</a></article>
+    <article class="report"><div class="report-top"><div><h4>10. Putra Heights Recycling Centre (Tzu Chi)</h4><div class="small muted">Putra Heights, Selangor — check official directory for address and current details</div></div><span class="tag">Confirm first</span></div><p>Named as a collection centre in the DOE directory. Confirm whether electrical appliances are accepted; do not assume every recycling centre takes bulky e-waste.</p><a target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Putra+Heights+Recycling+Centre+Tzu+Chi">Find centre on map ↗</a></article>
+   </div>
+   <p class="muted small">Source: Malaysia Department of Environment (DOE) official collector directory. The branch names above appear in the directory, but listings and acceptance can change. Entries without a full address are shown as map searches, not as verified GPS pins. Call ahead, especially for large appliances. <a href="https://ewaste.doe.gov.my/index.php/about/list-of-collectors/" target="_blank" rel="noopener noreferrer">Check the live DOE directory ↗</a></p>
+   <p class="muted small">Collection details can change. Confirm opening hours, item types and any fees with the centre first. For swollen or damaged batteries, do not puncture or dismantle them; ask the collection point how to transport them safely.</p>
+  </div>
+  <div id="foodWasteInfoPanel" class="card hidden" style="margin-top:14px;background:#fffaf0;box-shadow:none">
+   <h3 style="margin-top:0">🍌 How to handle food waste</h3>
+   <div class="list small">
+    <div><strong>1. Separate it:</strong> Keep food scraps in a separate container from plastics, glass and paper. Drain excess liquid.</div>
+    <div><strong>2. Compost suitable scraps:</strong> Fruit and vegetable peels, coffee grounds, tea leaves and eggshells are commonly suitable for home or community composting. Follow the compost service's accepted-items list.</div>
+    <div><strong>3. Balance and cover:</strong> For a home compost bin, mix moist food scraps with dry “browns” such as dry leaves, shredded uncoated cardboard or small twigs. Cover fresh scraps to help deter pests and odours.</div>
+    <div><strong>4. Avoid common problems:</strong> Do not add plastic, packaging or liquids. Meat, fish, dairy, oily food and cooked leftovers can attract pests in basic home composters; only add them if your composting system specifically accepts them.</div>
+    <div><strong>5. No compost option?</strong> Use your local council or community organic-waste collection if available. Otherwise, place food waste in the designated general-waste bin according to local rules—never leave it on the ground or in drains.</div>
+   </div>
+  </div>
+  <p class="muted small">Guidance is general. Check the rules used by your local council or recycling provider.</p>
+ </div>
+</section>
+
+<section id="hotspots" class="page">
+  <div class="section-head"><div><h2>Sime Darby Township hotspot map</h2><div class="muted small">Generated schematic map with demo hotspots and resident reports that include coordinates.</div></div><button class="btn" data-go="report">＋ Report a hotspot</button></div>
+  <div class="notice">This is a simple generated illustration, not a real street map or official township boundary. The city/township dropdown has been removed and the prototype uses one fixed illustrative map centre. Sample hotspots are fictional; resident reports appear as approximate markers when coordinates are supplied.</div>
+  <div class="hotspot-layout">
+    <div class="map-card">
+      <div class="map-toolbar">
+        <input type="hidden" id="mapTownshipSelect" value="elmina"><span class="static-map-location">📍 Fixed demo map centre · illustrative only</span>
+        <select id="mapIssueFilter" aria-label="Filter hotspot type"><option value="all">All issue types</option><option value="Illegal dumping">Illegal dumping</option><option value="Overflowing bin">Overflowing rubbish bin</option><option value="Missed collection">Missed collection</option><option value="Recycling issue">Recycling issue</option></select>
+        <select id="mapSeverityFilter" aria-label="Filter severity"><option value="all">All severity levels</option><option value="red">Serious · Red</option><option value="orange">Intermediate · Orange</option><option value="yellow">Slight · Yellow</option><option value="green">Free / clear · Green</option></select>
+        <button class="btn secondary" type="button" id="mapResetBtn">Reset view</button>
+      </div>
+      <div id="townshipMap" class="township-map" role="application" aria-label="Generated schematic map with CleanTown hotspot markers"></div>
+      <div class="map-legend" aria-label="Severity legend"><span><i class="legend-dot" style="background:#d93632"></i>Red · Serious</span><span><i class="legend-dot" style="background:#ed8b28"></i>Orange · Intermediate</span><span><i class="legend-dot" style="background:#e6c32e"></i>Yellow · Slight</span><span><i class="legend-dot" style="background:#35a45b"></i>Green · Resolved / clear</span></div>
+      <div id="mapSelectedInfo" class="map-info" aria-live="polite"><h3>Select a hotspot</h3><p>Choose a marker or list item to inspect report details.</p></div>
+      <p class="map-attribution-note">Generated schematic map; not to scale and not based on live street tiles.</p>
+      <p class="map-note">The map uses one fixed demo centre; there is no city selector. This prototype does not include an official Sime Darby Property GIS boundary, validated drainage/river layers, or verified real-world hotspot records.</p>
+    </div>
+    <div class="map-card"><div class="section-head" style="margin:2px 0 12px"><div><h2 style="font-size:18px">Hotspot reports</h2><div class="muted small" id="mapResultsCount">Loading map records…</div></div></div><div id="mapHotspotList" class="map-list"></div></div>
+  </div>
+</section>
+
+<section id="facilities" class="page">
+ <div class="section-head"><div><h2>Find a recycling centre or rubbish bin</h2><div class="muted small">Explore a generated township map and open directions to a selected facility.</div></div><span class="pill">Generated map</span></div>
+ <div class="notice">This prototype map is generated locally. It combines management-entered shared facilities with clearly labelled fictional demo points; it does not discover real facilities from map providers. Use verified facility coordinates before travelling.</div>
+ <div class="facility-controls">
+  <input type="hidden" id="facilityTownshipSelect" value="elmina"><span class="static-map-location">📍 Fixed demo map centre · illustrative only</span>
+  <select id="facilityTypeFilter" aria-label="Facility type"><option value="all">Recycling centres and rubbish bins</option><option value="recycling">Recycling centres only</option><option value="bin">Rubbish bins / waste disposal only</option></select>
+  <select id="facilityTravelMode" aria-label="Travel mode"><option value="walking">Walking directions</option><option value="driving">Driving directions</option><option value="bicycling">Cycling directions</option><option value="transit">Public transport directions</option></select>
+  <button class="btn" type="button" id="facilityLocateBtn">◎ Use my location</button>
+  <button class="btn secondary" type="button" id="facilitySearchBtn">Search nearby</button>
+ </div>
+ <div id="facilityMessage" class="notice" aria-live="polite">Use your location or tap the generated map to set a starting point, then search for nearby facility entries.</div>
+ <div class="facility-layout">
+  <div class="map-card"><div id="facilityMap" class="facility-map" role="application" aria-label="Map of nearby recycling centres and rubbish bins"></div><p class="map-attribution-note">Generated schematic map; not to scale. External directions open in Google Maps and require internet access.</p></div>
+  <div class="map-card"><div class="section-head" style="margin:2px 0 12px"><div><h2 style="font-size:18px">Nearest facilities</h2><div class="muted small" id="facilityCount">No search run yet</div></div></div><div id="facilityResults" class="facility-results"><div class="empty">Search to find facilities mapped near your starting point.</div></div></div>
+ </div>
+ <p class="muted small">Important: The generated demo facility points are fictional and must not be used for real-world navigation. Only facilities entered and verified by township management should be treated as real. Distances are straight-line estimates; the directions link calculates a route separately.</p>
+</section>
+
+<section id="admin" class="page">
+ <div class="section-head"><div><h2>Management centre</h2><div class="muted small">Manage shared reports and community facility records.</div></div><span class="pill" id="adminConnectionState">Local-only mode</span></div>
+ <div id="cloudSetupMessage" class="notice">To enable cross-device live sync, configure the Supabase project URL and anon key in <code>supabase-config.js</code>, then run the SQL in <code>supabase-setup.sql</code>. See README.</div>
+ <div class="grid stats">
+  <div class="card"><div class="stat-label">Total reports</div><div class="stat-num count" id="adminTotal">3</div></div>
+  <div class="card"><div class="stat-label">Outstanding</div><div class="stat-num count" id="adminOpen">2</div></div>
+  <div class="card"><div class="stat-label">Resolved</div><div class="stat-num count" id="adminResolved">1</div></div>
+  <div class="card"><div class="stat-label">Resolution rate</div><div class="stat-num count" id="adminRate">33%</div></div>
+ </div>
+ <div class="section-head"><div><h2>Manage reports</h2><div class="muted small">Advance each report through the demo workflow.</div></div></div>
+ <div id="adminReports" class="list"></div>
+ <div class="actions"><button class="btn secondary" id="exportBtn">Export reports as CSV</button><button class="btn danger" id="resetBtn">Reset sample data</button></div>
+ <div class="section-head"><div><h2>Garbage truck timetable management</h2><div class="muted small">Add or update the collection schedule displayed to residents.</div></div></div>
+ <form id="truckScheduleAdminForm" class="card" style="margin-bottom:14px">
+  <div class="grid two"><div class="field"><label for="truckRouteName">Route / neighbourhood</label><input id="truckRouteName" required maxlength="100" placeholder="e.g. Elmina Lakeside"></div><div class="field"><label for="truckWasteType">Collection type</label><select id="truckWasteType"><option>General waste</option><option>Recycling</option><option>Green waste</option><option>Bulky waste</option></select></div></div>
+  <div class="grid two"><div class="field"><label for="truckWeekday">Collection day</label><select id="truckWeekday"><option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option><option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option><option value="0">Sunday</option></select></div><div class="field"><label for="truckTime">Scheduled arrival time</label><input id="truckTime" type="time" required value="08:00"></div></div>
+  <div class="field"><label for="truckNotes">Notes (optional)</label><input id="truckNotes" maxlength="200" placeholder="e.g. Put bins out by 7:30 AM"></div>
+  <div class="actions"><button class="btn" type="submit">＋ Add collection schedule</button></div>
+ </form><div id="truckScheduleAdminList" class="list"></div>
+ <div class="section-head"><div><h2>Shared facility directory</h2><div class="muted small">Add or update verified community recycling points and public bins. These entries appear in resident facility search when cloud sync is enabled. The map is schematic; verify all coordinates.</div></div></div>
+ <form id="facilityAdminForm" class="card" style="margin-bottom:14px">
+  <div class="grid two">
+   <div class="field"><label for="sharedFacilityName">Facility name</label><input id="sharedFacilityName" required maxlength="120" placeholder="e.g. Community recycling point"></div>
+   <div class="field"><label for="sharedFacilityType">Facility type</label><select id="sharedFacilityType"><option value="recycling">Recycling centre / point</option><option value="bin">Public rubbish bin / waste point</option></select></div>
+  </div>
+  <div class="field"><label for="sharedFacilityAddress">Location / address</label><input id="sharedFacilityAddress" required maxlength="200" placeholder="Street, neighbourhood, township"></div>
+  <div class="grid two">
+   <div class="field"><label for="sharedFacilityLat">Latitude</label><input id="sharedFacilityLat" type="number" step="any" min="-90" max="90" required placeholder="3.1905"></div>
+   <div class="field"><label for="sharedFacilityLng">Longitude</label><input id="sharedFacilityLng" type="number" step="any" min="-180" max="180" required placeholder="101.5105"></div>
+  </div>
+  <div class="field"><label for="sharedFacilityNotes">Notes (hours, accepted items, contact)</label><textarea id="sharedFacilityNotes" rows="2" style="min-height:70px" maxlength="500" placeholder="Confirm details before visiting"></textarea></div>
+  <div class="actions"><button class="btn" type="submit" id="facilitySaveButton">＋ Add facility to shared directory</button><button class="btn secondary" type="button" id="facilityCancelEdit" style="display:none">Cancel edit</button><button class="btn secondary" type="button" id="facilityUseMapCenter">Use default map centre</button></div>
+ </form>
+ <div id="sharedFacilityAdminList" class="list"></div>
+ <div id="adminMessage" aria-live="polite"></div>
+</section>
+</main>
+<footer class="footer"><strong>CleanTown</strong> · Cleaner streets. Smarter communities.<br>Student prototype · Sime Darby Township demo · Sample data only · Not connected to a local authority.</footer>
+</div>
+<script src="./ai-config.js"></script>
+<script src="./supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+(function(){
+const STORAGE_KEY='cleantown_sime_darby_demo_reports_v1';
+const FACILITY_STORAGE_KEY='cleantown_shared_facilities_cache_v1';
+let db=null,cloudMode=false,cloudChannel=null,sharedFacilities=[],editingFacilityId=null;
+function updateConnectionUI(message){const badge=$('connectionBadge'),state=$('adminConnectionState'),setup=$('cloudSetupMessage');if(cloudMode){badge.textContent='● Shared live database';badge.style.background='#d7f4a8';badge.style.color='#123c32';state.textContent='Supabase connected';state.style.background='#d7f4a8';if(setup){setup.className='notice';setup.textContent=message||'Connected to Supabase. Reports and facility changes sync across connected browsers in near real time.';}}else{badge.textContent='Local demo · not synced';state.textContent='Local-only mode';if(setup){setup.className='notice';setup.innerHTML='Cloud sync is not configured yet. Add your Supabase project URL and anon key to <code>supabase-config.js</code>, then run <code>supabase-setup.sql</code>. Until then, this app uses browser-local storage.';}}}
+function rowToReport(r){return {...r,created:Number(r.created)||Date.now(),time:r.time||new Date(Number(r.created)||Date.now()).toLocaleString()};}
+function reportToRow(r){return {id:r.id,type:r.type,location:r.location,details:r.details,status:r.status,time:r.time,created:Number(r.created)||Date.now(),lat:Number.isFinite(Number(r.lat))&&r.lat!==null?Number(r.lat):null,lng:Number.isFinite(Number(r.lng))&&r.lng!==null?Number(r.lng):null};}
+async function cloudLoadReports(){if(!db)return;const {data,error}=await db.from('cleantown_reports').select('*').order('created',{ascending:false});if(error)throw error;reports=(data||[]).map(rowToReport);try{localStorage.setItem(STORAGE_KEY,JSON.stringify(reports));}catch(e){}render();}
+async function cloudSaveReport(r){if(!db)return;const {error}=await db.from('cleantown_reports').upsert(reportToRow(r),{onConflict:'id'});if(error){$('adminMessage').innerHTML='<div class="error">Cloud save failed: '+escapeHTML(error.message)+'. Your change remains in this browser; check Supabase setup and policies.</div>';throw error;}}
+function rowToFacility(f){return {id:f.id,name:f.name,kind:f.kind,lat:Number(f.lat),lng:Number(f.lng),address:f.address||'',notes:f.notes||'',verified:!!f.verified,updated_at:f.updated_at||null};}
+async function cloudLoadFacilities(){if(!db)return;const {data,error}=await db.from('cleantown_facilities').select('*').order('name');if(error)throw error;sharedFacilities=(data||[]).map(rowToFacility);try{localStorage.setItem(FACILITY_STORAGE_KEY,JSON.stringify(sharedFacilities));}catch(e){}renderSharedFacilityAdmin();if(facilityOrigin){mergeSharedFacilitiesIntoResults();renderFacilityMarkers();renderFacilityResults();}}
+async function cloudInit(){const cfg=window.CLEANTOWN_SUPABASE_CONFIG||{};if(!cfg.url||!cfg.anonKey||!window.supabase||!window.supabase.createClient){updateConnectionUI();return;}try{db=window.supabase.createClient(cfg.url,cfg.anonKey);const {error}=await db.from('cleantown_reports').select('id').limit(1);if(error)throw error;cloudMode=true;updateConnectionUI();await cloudLoadReports();await cloudLoadFacilities();cloudChannel=db.channel('cleantown-live-sync').on('postgres_changes',{event:'*',schema:'public',table:'cleantown_reports'},()=>cloudLoadReports().catch(e=>console.warn('Report realtime refresh failed',e))).on('postgres_changes',{event:'*',schema:'public',table:'cleantown_facilities'},()=>cloudLoadFacilities().catch(e=>console.warn('Facility realtime refresh failed',e))).subscribe();}catch(e){db=null;cloudMode=false;updateConnectionUI('Supabase connection failed. Check the URL, anon key, SQL schema and row-level security policies.');$('adminMessage').innerHTML='<div class="error">Cloud connection failed: '+escapeHTML(e.message||'unknown error')+'. The app is running in local-only mode.</div>';console.warn('CleanTown cloud setup error',e);}}
+
+const seed=[
+{id:'CT-104',type:'Illegal dumping',location:'Community park, Block B',details:'Rubbish bags beside the walking path',status:'In progress',time:'Today · 9:15 AM',created:Date.now()-3600000},
+{id:'CT-103',type:'Overflowing bin',location:'Apartment Block A',details:'Public bin is nearly full',status:'Submitted',time:'Today · 10:30 AM',created:Date.now()-1800000},
+{id:'CT-102',type:'Missed collection',location:'Jalan Harmoni',details:'Scheduled collection has not arrived',status:'Resolved',time:'Yesterday',created:Date.now()-86400000}
+];
+let reports;
+try{const saved=localStorage.getItem(STORAGE_KEY);reports=saved?JSON.parse(saved):seed.map(x=>({...x}));if(!Array.isArray(reports))reports=seed.map(x=>({...x}));}catch(e){reports=seed.map(x=>({...x}));}
+const $=id=>document.getElementById(id);
+function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(reports));}catch(e){}}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function statusClass(s){return s==='Resolved'?'resolved':s==='In progress'?'progress':'';}
+function statusTag(s){return `<span class="tag ${statusClass(s)}">${escapeHTML(s)}</span>`;}
+function reportCard(r,admin=false){
+const actions=admin?`<div class="actions"><button class="btn secondary" data-advance="${escapeHTML(r.id)}">${r.status==='Submitted'?'Start work':r.status==='In progress'?'Mark resolved':'Reopen report'}</button></div>`:'';
+return `<article class="report"><div class="report-top"><div><div class="muted small">${escapeHTML(r.id)} · ${escapeHTML(r.time)}</div><h3>${escapeHTML(r.type)}</h3><div class="small">${escapeHTML(r.location)}</div></div>${statusTag(r.status)}</div><div class="muted small" style="margin-top:9px">${escapeHTML(r.details)}</div>${actions}</article>`;
+}
+function counts(){const open=reports.filter(r=>r.status!=='Resolved').length,res=reports.filter(r=>r.status==='Resolved').length,prog=reports.filter(r=>r.status==='In progress').length,total=reports.length,rate=total?Math.round(res/total*100):0;
+$('statOpen').textContent=open;$('statResolved').textContent=res;$('statProgress').textContent=prog;
+$('adminTotal').textContent=total;$('adminOpen').textContent=open;$('adminResolved').textContent=res;$('adminRate').textContent=rate+'%';}
+function render(){
+counts();
+$('recentReports').innerHTML=reports.slice(0,3).map(r=>reportCard(r)).join('')||'<div class="empty">No reports yet. Be the first to submit one.</div>';
+renderTracking();renderAdmin();renderHotspots();persist();
+}
+function renderTracking(){
+const q=$('searchReports').value.trim().toLowerCase(),f=$('statusFilter').value;
+const list=reports.filter(r=>(f==='All statuses'||r.status===f)&&(r.id+' '+r.type+' '+r.location+' '+r.details).toLowerCase().includes(q));
+$('allReports').innerHTML=list.map(r=>reportCard(r)).join('')||'<div class="empty">No matching reports found.</div>';
+}
+function renderAdmin(){
+$('adminReports').innerHTML=reports.map(r=>reportCard(r,true)).join('')||'<div class="empty">No reports to manage.</div>';
+}
+const townshipCenters={
+ elmina:{name:'City of Elmina',lat:3.1905,lng:101.5105,zoom:14},
+ ara:{name:'Ara Damansara',lat:3.1135,lng:101.5755,zoom:14},
+ bukitraja:{name:'Bandar Bukit Raja',lat:3.0875,lng:101.4350,zoom:13},
+ jelutong:{name:'Bukit Jelutong',lat:3.1070,lng:101.5480,zoom:14},
+ putra:{name:'Putra Heights',lat:2.9970,lng:101.5730,zoom:14},
+ ainsdale:{name:'Bandar Ainsdale',lat:2.7200,lng:101.8850,zoom:14},
+ nilai:{name:'Nilai Impian',lat:2.8070,lng:101.7970,zoom:14}
+};
+const demoHotspots=[
+ {id:'DEMO-01',dx:-0.012,dy:-0.008,location:'Demo access road',type:'Illegal dumping',severity:'red',level:'Serious',count:4,description:'Illustrative sample of mixed-waste bags near an access road.',river:false},
+ {id:'DEMO-02',dx:0.005,dy:-0.006,location:'Demo community park',type:'Overflowing bin',severity:'orange',level:'Intermediate',count:2,description:'Illustrative sample of an overflowing public rubbish bin.',river:false},
+ {id:'DEMO-03',dx:0.012,dy:0.007,location:'Demo waterside path',type:'Illegal dumping',severity:'red',level:'Serious',count:3,description:'Illustrative sample of dumping near a waterway. Not a verified incident.',river:true},
+ {id:'DEMO-04',dx:-0.008,dy:0.010,location:'Demo bus stop',type:'Overflowing bin',severity:'yellow',level:'Slight',count:1,description:'Illustrative sample of a nearly full bin with waste still contained.',river:false},
+ {id:'DEMO-05',dx:0.002,dy:0.014,location:'Demo community hub',type:'Overflowing bin',severity:'orange',level:'Intermediate',count:2,description:'Illustrative sample of loose litter around a public bin.',river:false},
+ {id:'DEMO-06',dx:-0.015,dy:0.002,location:'Demo recycling point',type:'Recycling issue',severity:'green',level:'Free / clear',count:0,description:'Illustrative clear-area marker; not a real inspection.',river:false}
+];
+const severityColors={red:'#d93632',orange:'#ed8b28',yellow:'#c5a51a',green:'#35a45b'};
+let selectedHotspotId='DEMO-01',selectedTownship='elmina',mapReady=false;
+let facilityOrigin=null,facilityRecords=[],selectedFacilityId=null,facilityGuideContext=null;
+function facilityDistance(a,b){const rad=x=>x*Math.PI/180,R=6371000,dLat=rad(b.lat-a.lat),dLng=rad(b.lng-a.lng),q=Math.sin(dLat/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(dLng/2)**2;return 2*R*Math.asin(Math.sqrt(q));}
+function mapPoint(lat,lng,center){return {x:400+((Number(lng)-center.lng)/0.03)*330,y:240-((Number(lat)-center.lat)/0.025)*190};}
+function pointCoords(x,y,center){return {lat:center.lat+((240-y)/190)*0.025,lng:center.lng+((x-400)/330)*0.03};}
+function generatedMapBase(label){return `<rect width="800" height="480" fill="#edf4e7"/><path d="M-20 70 C140 120 210 40 330 110 S570 190 830 105 L830 150 C620 240 490 160 340 155 S120 180 -20 115Z" fill="#d7e9d2"/><path d="M-20 360 C140 300 240 410 360 345 S610 280 830 365" fill="none" stroke="#a9d8ec" stroke-width="34"/><path d="M-20 360 C140 300 240 410 360 345 S610 280 830 365" fill="none" stroke="#c8e8f4" stroke-width="24"/><g fill="#dcebd5" stroke="#c8dac0" stroke-width="1.5"><rect x="54" y="72" width="125" height="75" rx="8"/><rect x="205" y="60" width="105" height="85" rx="8"/><rect x="490" y="54" width="130" height="82" rx="8"/><rect x="645" y="80" width="105" height="72" rx="8"/><rect x="60" y="190" width="110" height="88" rx="8"/><rect x="212" y="190" width="125" height="82" rx="8"/><rect x="430" y="188" width="120" height="78" rx="8"/><rect x="590" y="190" width="145" height="82" rx="8"/><rect x="75" y="405" width="120" height="45" rx="8"/><rect x="245" y="408" width="100" height="42" rx="8"/><rect x="470" y="408" width="110" height="42" rx="8"/><rect x="635" y="410" width="110" height="40" rx="8"/></g><g fill="none" stroke-linecap="round"><path d="M-10 166 L810 166 M-10 300 L810 300 M190 -10 L190 500 M365 -10 L365 500 M565 -10 L565 500 M780 -10 L780 500" stroke="#fff" stroke-width="18"/><path d="M-10 166 L810 166 M-10 300 L810 300 M190 -10 L190 500 M365 -10 L365 500 M565 -10 L565 500 M780 -10 L780 500" stroke="#d6d8ce" stroke-width="2"/><path d="M25 20 L300 465 M330 15 L650 470 M790 20 L420 470" stroke="#fff" stroke-width="11"/><path d="M25 20 L300 465 M330 15 L650 470 M790 20 L420 470" stroke="#d6d8ce" stroke-width="1.5"/></g><g fill="#67816c" font-size="12" font-weight="700"><text x="80" y="100">RESIDENTIAL</text><text x="220" y="94">HOMES</text><text x="505" y="88">COMMUNITY</text><text x="657" y="112">HOUSING</text><text x="77" y="222">PARK</text><text x="228" y="222">SHOP LOTS</text><text x="447" y="218">COMMUNITY</text><text x="610" y="218">RESIDENTIAL</text><text x="440" y="338" fill="#397a9a">RIVER / DRAIN CORRIDOR</text></g><g transform="translate(24 24)"><rect width="220" height="32" rx="9" fill="#ffffffdd" stroke="#d8e1d7"/><text x="12" y="21" fill="#244b37" font-size="12" font-weight="800">${escapeHTML(label)} · SCHEMATIC</text></g><g transform="translate(735 25)"><circle r="17" fill="#ffffffcc" stroke="#cbd8ca"/><path d="M0 10 L0 -9 M0 -9 L-5 -2 M0 -9 L5 -2" stroke="#2e5942" stroke-width="2.5" fill="none" stroke-linecap="round"/><text x="0" y="30" text-anchor="middle" fill="#46614e" font-size="10" font-weight="800">N</text></g><text x="18" y="463" fill="#5f7964" font-size="11">Illustrative streets and blocks · not to scale</text>`;}
+function renderGeneratedMap(elId,label,center,markers,kind){const el=$(elId);if(!el)return;const pins=markers.map(m=>{if(!Number.isFinite(Number(m.lat))||!Number.isFinite(Number(m.lng)))return '';const p=mapPoint(Number(m.lat),Number(m.lng),center);if(p.x < -15||p.x>815||p.y < -15||p.y>495)return '';const color=m.color||severityColors[m.severity]||(m.kind==='bin'?'#e18a22':'#25834d');const glyph=m.glyph||(m.kind==='bin'?'B':'♻');return `<g class="map-pin ${m.id===selectedHotspotId?'selected':''}" tabindex="0" role="button" aria-label="${escapeHTML(m.name||m.location||m.id)}" data-map-pin="${escapeHTML(m.id)}" transform="translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})" style="color:${color}"><circle class="pin-halo" r="20" fill="${color}"/><circle class="pin-core" r="13" fill="${color}" stroke="#fff" stroke-width="2.5"/><text y="1">${escapeHTML(glyph)}</text></g>`;}).join('');el.innerHTML=`<svg class="generated-map-svg" viewBox="0 0 800 480" role="img" aria-label="Generated schematic map for ${escapeHTML(label)}">${generatedMapBase(label)}${pins}</svg>`;const svg=el.querySelector('svg');svg.addEventListener('click',e=>{const pin=e.target.closest('[data-map-pin]');if(pin){e.stopPropagation();if(kind==='hotspot')selectHotspot(pin.dataset.mapPin);else selectFacility(pin.dataset.mapPin,false);return;}const r=svg.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*800,y=(e.clientY-r.top)/r.height*480;const pos=pointCoords(x,y,center);if(kind==='hotspot'){$('reportLat').value=pos.lat.toFixed(6);$('reportLng').value=pos.lng.toFixed(6);$('locationMessage').textContent='Schematic map pin selected (approximate): '+pos.lat.toFixed(6)+', '+pos.lng.toFixed(6)+'. Confirm the coordinates before submitting.';}else{facilityOrigin=pos;$('facilityMessage').textContent='Starting point selected on the schematic map (approximate). Search nearby to refresh results.';renderFacilityMap();}});svg.addEventListener('keydown',e=>{const pin=e.target.closest('[data-map-pin]');if(pin&&(e.key==='Enter'||e.key===' ')){e.preventDefault();if(kind==='hotspot')selectHotspot(pin.dataset.mapPin);else selectFacility(pin.dataset.mapPin,false);}});}
+function facilityDemoPoints(origin){return [
+ {id:'demo-recycle-1',kind:'recycling',name:'Demo community recycling point',address:'Illustrative location — verify before travel',dlat:0.004,dlng:-0.006,notes:'Fictional hackathon demo point; accepted materials are not verified'},
+ {id:'demo-bin-1',kind:'bin',name:'Demo public rubbish bin · North',address:'Illustrative location — verify before travel',dlat:-0.003,dlng:0.004,notes:'Fictional public-bin marker for prototype demonstration'},
+ {id:'demo-recycle-2',kind:'recycling',name:'Demo neighbourhood drop-off',address:'Illustrative location — verify before travel',dlat:0.009,dlng:0.008,notes:'Fictional hackathon demo point; accepted materials are not verified'},
+ {id:'demo-bin-2',kind:'bin',name:'Demo park waste point · West',address:'Illustrative location — verify before travel',dlat:-0.008,dlng:-0.009,notes:'Fictional public waste-point marker for prototype demonstration'},
+ {id:'demo-bin-3',kind:'bin',name:'Demo residential street bin',address:'Illustrative residential block — not a real address',dlat:0.002,dlng:0.010,notes:'Fictional marker; check with township management for actual bin locations'},
+ {id:'demo-bin-4',kind:'bin',name:'Demo playground rubbish bin',address:'Illustrative park block — not a real address',dlat:-0.010,dlng:0.005,notes:'Fictional marker; capacity and collection schedule are not verified'},
+ {id:'demo-bin-5',kind:'bin',name:'Demo food-court waste point',address:'Illustrative shop-lot block — not a real address',dlat:0.006,dlng:-0.002,notes:'Fictional marker; separate food waste only if the site provides a labelled bin'},
+ {id:'demo-bin-6',kind:'bin',name:'Demo bus-stop litter bin',address:'Illustrative road junction — not a real address',dlat:-0.004,dlng:-0.012,notes:'Fictional marker; do not treat as a confirmed public bin'},
+ {id:'demo-bin-7',kind:'bin',name:'Demo community-hall waste point',address:'Illustrative community block — not a real address',dlat:0.012,dlng:-0.004,notes:'Fictional marker; confirm access and accepted waste with site management'},
+ {id:'demo-bin-8',kind:'bin',name:'Demo apartment refuse area',address:'Illustrative residential block — not a real address',dlat:-0.012,dlng:0.010,notes:'Fictional marker; residential refuse rooms may be access-controlled'},
+ {id:'demo-recycle-3',kind:'recycling',name:'Demo paper and cardboard collection point',address:'Illustrative shop-lot block — not a real address',dlat:0.010,dlng:-0.011,notes:'Fictional marker; keep paper and cardboard dry; accepted items are not verified'},
+ {id:'demo-recycle-4',kind:'recycling',name:'Demo mixed-recyclables drop-off',address:'Illustrative community block — not a real address',dlat:-0.006,dlng:0.013,notes:'Fictional marker; confirm accepted plastics, metals and glass before visiting'}
+ ].map(f=>({...f,lat:origin.lat+f.dlat,lng:origin.lng+f.dlng,demo:true,shared:false,tags:{},distance:facilityDistance(origin,{lat:origin.lat+f.dlat,lng:origin.lng+f.dlng})}));}
+function renderFacilityResults(){const filter=$('facilityTypeFilter').value;const list=facilityRecords.filter(x=>filter==='all'||x.kind===filter).sort((a,b)=>a.distance-b.distance);$('facilityCount').textContent=`${list.length} result${list.length===1?'':'s'} · nearest first`; $('facilityResults').innerHTML=list.map((f,i)=>`<button class="facility-item ${selectedFacilityId===f.id?'active':''}" type="button" data-facility-select="${escapeHTML(f.id)}"><span class="facility-badge ${f.kind==='bin'?'bin':''}">${f.kind==='bin'?'Rubbish bin / waste point':'Recycling point'}</span><strong>${i+1}. ${escapeHTML(f.name)}</strong><small>${(f.distance/1000).toFixed(2)} km straight-line · ${escapeHTML(f.address||'Address not listed')}</small><small>${escapeHTML(f.notes||(f.shared?'Added to CleanTown shared directory':''))}</small>${f.demo?'<small><strong>DEMO ONLY — fictional location</strong></small>':f.shared?'<small>CleanTown shared facility'+(f.verified?' · marked verified':' · not yet verified')+'</small>':''}<span class="actions"><span class="btn" style="display:inline-block;margin-top:8px;padding:8px 10px">Navigate ↗</span></span></button>`).join('')||'<div class="empty">No facilities match this filter. Add verified facilities in the management portal or try another starting point.</div>';}
+function renderFacilityMap(){if(!facilityOrigin)return;const list=facilityRecords.filter(f=>$('facilityTypeFilter').value==='all'||f.kind===$('facilityTypeFilter').value);const markers=[{id:'facility-origin',lat:facilityOrigin.lat,lng:facilityOrigin.lng,name:'Your starting point',color:'#246fce',glyph:'●'},...list.map(f=>({...f,color:f.kind==='bin'?'#e18a22':'#25834d',glyph:f.kind==='bin'?'B':'♻'}))];renderGeneratedMap('facilityMap',townshipCenters[$('facilityTownshipSelect').value]?.name||'Selected location',facilityOrigin,markers,'facility');}
+function renderFacilityMarkers(){renderFacilityMap();}
+function facilityDirectionsURL(f){return 'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(f.lat+','+f.lng)+'&travelmode='+encodeURIComponent($('facilityTravelMode').value||'walking');}
+function mergeSharedFacilitiesIntoResults(){if(!facilityOrigin)return;const demos=facilityRecords.filter(f=>f.demo);facilityRecords=[...demos];const existing=new Set(facilityRecords.map(f=>f.id));sharedFacilities.forEach(f=>{if(!Number.isFinite(f.lat)||!Number.isFinite(f.lng)||existing.has('shared/'+f.id))return;facilityRecords.push({id:'shared/'+f.id,kind:f.kind,lat:f.lat,lng:f.lng,tags:{description:f.notes||'',source:'CleanTown shared directory'},name:f.name,address:f.address,distance:facilityDistance(facilityOrigin,f),shared:true,notes:f.notes,verified:f.verified});});facilityRecords.sort((a,b)=>a.distance-b.distance);}
+function initFacilityMap(){if(!facilityOrigin){const c=townshipCenters[$('facilityTownshipSelect').value]||townshipCenters.elmina;facilityOrigin={lat:c.lat,lng:c.lng};}renderFacilityMap();return true;}
+function selectFacility(id,openDirections=true){const f=facilityRecords.find(x=>x.id===id);if(!f)return;selectedFacilityId=f.id;renderFacilityResults();renderFacilityMap();if(openDirections)window.open(facilityDirectionsURL(f),'_blank','noopener');}
+async function searchFacilities(){if(!facilityOrigin){const c=townshipCenters[$('facilityTownshipSelect').value]||townshipCenters.elmina;facilityOrigin={lat:c.lat,lng:c.lng};}facilityRecords=facilityDemoPoints(facilityOrigin);mergeSharedFacilitiesIntoResults();selectedFacilityId=facilityRecords.length?facilityRecords[0].id:null;renderFacilityMap();renderFacilityResults();const realCount=facilityRecords.filter(f=>!f.demo).length;$('facilityMessage').className='notice';$('facilityMessage').textContent=realCount?`Showing ${facilityRecords.length} facility entries, including ${realCount} from the shared CleanTown directory. Demo points are fictional; verify all real locations before travel.`:'Showing fictional sample facilities for demonstration. Add verified locations through the management portal; no real-world facility search is performed.';}
+function useFacilityLocation(){if(!navigator.geolocation){$('facilityMessage').className='error';$('facilityMessage').textContent='This browser does not support location. Use GPS or tap the generated map to set a starting point.';return;}$('facilityMessage').className='notice';$('facilityMessage').textContent='Requesting location permission…';navigator.geolocation.getCurrentPosition(pos=>{facilityOrigin={lat:pos.coords.latitude,lng:pos.coords.longitude};searchFacilities();$('facilityMessage').textContent='Your GPS location is set. Note: demo facilities shown nearby are fictional until management adds verified records.';},err=>{$('facilityMessage').className='error';$('facilityMessage').textContent=err.code===1?'Location permission denied. Use GPS or tap the map instead.':'Could not get location. Use HTTPS or localhost and check device location settings.';},{enableHighAccuracy:true,timeout:12000,maximumAge:60000});}
+$('facilitySearchBtn').addEventListener('click',searchFacilities);$('facilityLocateBtn').addEventListener('click',useFacilityLocation);$('facilityTypeFilter').addEventListener('change',()=>{renderFacilityMap();renderFacilityResults();});$('facilityResults').addEventListener('click',e=>{const item=e.target.closest('[data-facility-select]');if(!item)return;const f=facilityRecords.find(x=>x.id===item.dataset.facilitySelect);if(!f)return;selectFacility(f.id,true);});
+
+function hotspotSeverityClass(severity){return 'severity-'+severity;}
+function severityForReport(r){if(r.status==='Resolved')return 'green';if(r.type==='Illegal dumping')return 'red';if(r.type==='Overflowing bin')return 'orange';return 'yellow';}
+function levelForSeverity(s){return ({red:'Serious',orange:'Intermediate',yellow:'Slight',green:'Free / clear'})[s]||'Slight';}
+function currentHotspots(){
+ const center=townshipCenters[selectedTownship]||townshipCenters.elmina;
+ const samples=(cloudMode?[]:demoHotspots).map(h=>({...h,lat:center.lat+h.dy,lng:center.lng+h.dx,source:'sample'}));
+ const resident=reports.map(r=>({...r,source:'resident',severity:severityForReport(r),level:levelForSeverity(severityForReport(r)),lat:Number(r.lat),lng:Number(r.lng),description:r.details||'',count:1,river:false,location:r.location,type:r.type}));
+ return [...samples,...resident];
+}
+function filteredHotspots(){const issue=$('mapIssueFilter').value,sev=$('mapSeverityFilter').value;return currentHotspots().filter(h=>(issue==='all'||h.type===issue)&&(sev==='all'||h.severity===sev));}
+function renderMapMarkers(){const center=townshipCenters[selectedTownship]||townshipCenters.elmina;const filtered=filteredHotspots();renderGeneratedMap('townshipMap',center.name,center,filtered.map(h=>({...h,name:h.location,glyph:h.source==='sample'?'D':(h.type==='Illegal dumping'?'D':h.type==='Overflowing bin'?'B':'R'),color:severityColors[h.severity]})),'hotspot');mapReady=true;}
+function renderMapHotspotList(){const list=filteredHotspots();$('mapResultsCount').textContent=`${list.length} record${list.length===1?'':'s'} · ${list.filter(h=>h.source==='resident').length} resident report(s)`;$('mapHotspotList').innerHTML=list.map(h=>`<button type="button" class="map-list-item ${h.id===selectedHotspotId?'active':''}" data-map-select="${escapeHTML(h.id)}"><span class="severity-dot" style="background:${severityColors[h.severity]}"></span><span style="flex:1"><strong>${escapeHTML(h.location)}</strong><small>${escapeHTML(h.type)} · ${escapeHTML(h.level)} · ${h.source==='sample'?'fictional sample':'resident report '+escapeHTML(h.id)}${h.river?' · Waterside sample':''}${Number.isFinite(h.lat)&&Number.isFinite(h.lng)?'':' · no GPS pin'}</small></span><span class="severity-badge ${hotspotSeverityClass(h.severity)}">${h.severity==='green'?'Clear':h.level}</span></button>`).join('')||'<div class="empty">No reports match these filters.</div>';}
+function renderMapSelectedInfo(){const h=currentHotspots().find(x=>x.id===selectedHotspotId);if(!h){$('mapSelectedInfo').innerHTML='<h3>Select a hotspot</h3><p>Choose a marker or a hotspot from the list.</p>';return;}$('mapSelectedInfo').innerHTML=`<div class="row" style="flex-wrap:wrap"><h3>${escapeHTML(h.location)}</h3><span class="spacer"></span><span class="severity-badge ${hotspotSeverityClass(h.severity)}">${h.severity==='green'?'Free / clear':h.level}</span></div><p><strong>${escapeHTML(h.type)}</strong> · ${escapeHTML(h.id)} · ${h.source==='sample'?'Fictional demo sample':'Resident-submitted report'}</p><p>${escapeHTML(h.description||'No description supplied.')}</p><p><strong>Status:</strong> ${escapeHTML(h.status||'Sample only')} · <strong>Coordinates:</strong> ${Number.isFinite(h.lat)&&Number.isFinite(h.lng)?h.lat.toFixed(5)+', '+h.lng.toFixed(5):'Not supplied — report is not pinned on map'}</p><div class="actions"><button class="btn secondary" type="button" id="reportNearbyBtn">Report nearby issue</button>${Number.isFinite(h.lat)&&Number.isFinite(h.lng)?`<button class="btn secondary" type="button" id="centerSelectedBtn">Highlight map pin</button>`:''}</div>`;const centerBtn=$('centerSelectedBtn');if(centerBtn)centerBtn.addEventListener('click',()=>renderMapMarkers());const reportBtn=$('reportNearbyBtn');if(reportBtn)reportBtn.addEventListener('click',()=>navigate('report'));}
+function selectHotspot(id){selectedHotspotId=id;renderMapMarkers();renderMapHotspotList();renderMapSelectedInfo();}
+function renderHotspots(){if(!$('mapIssueFilter'))return;const filtered=filteredHotspots();if(!filtered.some(h=>h.id===selectedHotspotId))selectedHotspotId=filtered.length?filtered[0].id:'';renderMapMarkers();renderMapHotspotList();renderMapSelectedInfo();}
+$('mapIssueFilter').addEventListener('change',renderHotspots);$('mapSeverityFilter').addEventListener('change',renderHotspots);
+// Township selection is fixed for this township-specific prototype; city dropdown removed.
+$('mapResetBtn').addEventListener('click',()=>{$('mapIssueFilter').value='all';$('mapSeverityFilter').value='all';selectedHotspotId='';renderHotspots();});
+$('mapHotspotList').addEventListener('click',e=>{const item=e.target.closest('[data-map-select]');if(item)selectHotspot(item.dataset.mapSelect);});
+$('useMyLocationBtn').addEventListener('click',()=>{
+ const msg=$('locationMessage');if(!navigator.geolocation){msg.textContent='This browser does not support location access. Enter coordinates manually or tap the map.';return;}
+ msg.textContent='Requesting location permission…';navigator.geolocation.getCurrentPosition(pos=>{$('reportLat').value=pos.coords.latitude.toFixed(6);$('reportLng').value=pos.coords.longitude.toFixed(6);msg.textContent='GPS coordinates captured. The generated map can only show an approximate pin; confirm the location before submitting.';},err=>{msg.textContent=err.code===1?'Location permission was denied. Enter coordinates manually or tap the map.':'Could not get your location. Use HTTPS/localhost and check device location settings.';},{enableHighAccuracy:true,timeout:10000,maximumAge:60000});
+});
+
+// Truck collection timetable. Demo schedules live in this browser until a shared backend is configured.
+const TRUCK_SCHEDULE_KEY='cleantown_truck_schedule_v1';
+const weekdayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const defaultTruckSchedules=[
+ {id:'demo-1',route:'Elmina Lakeside',type:'General waste',weekday:1,time:'08:00',notes:'Place bins out by 7:30 AM',demo:true},
+ {id:'demo-2',route:'City of Elmina',type:'General waste',weekday:2,time:'08:30',notes:'Keep collection points clear',demo:true},
+ {id:'demo-3',route:'DASH / Denai Alam',type:'Recycling',weekday:3,time:'09:00',notes:'Only accepted recyclable materials',demo:true},
+ {id:'demo-4',route:'Bukit Subang',type:'General waste',weekday:4,time:'08:00',notes:'Tie bags securely',demo:true},
+ {id:'demo-5',route:'Sime Darby Township — bulky collection',type:'Bulky waste',weekday:6,time:'10:00',notes:'Confirm bulky items with management first',demo:true}
+];
+let truckSchedules=[];
+try{truckSchedules=JSON.parse(localStorage.getItem(TRUCK_SCHEDULE_KEY)||'null')||defaultTruckSchedules.map(x=>({...x}));}catch(e){truckSchedules=defaultTruckSchedules.map(x=>({...x}));}
+function saveTruckSchedules(){try{localStorage.setItem(TRUCK_SCHEDULE_KEY,JSON.stringify(truckSchedules));}catch(e){}renderTruckSchedules();renderTruckAdminSchedules();}
+function nextTruckDate(item){const now=new Date(),d=new Date(now);d.setHours(...item.time.split(':').map(Number),0,0);let delta=(Number(item.weekday)-now.getDay()+7)%7;if(delta===0&&d<=now)delta=7;d.setDate(now.getDate()+delta);return d;}
+function fmtTruckDate(d){return d.toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short'});}
+function renderTruckSchedules(){const el=$('truckScheduleList');if(!el)return;const list=[...truckSchedules].sort((a,b)=>a.weekday-b.weekday||a.time.localeCompare(b.time));el.innerHTML=list.map(x=>{const d=nextTruckDate(x);return `<div class="card"><div class="row" style="align-items:flex-start;flex-wrap:wrap"><div style="font-size:25px">🚛</div><div style="flex:1;min-width:180px"><h3 style="margin:0 0 5px">${escapeHTML(x.route)}</h3><div class="muted small">${escapeHTML(x.type)} · Every ${weekdayNames[x.weekday]}</div><div class="small" style="margin-top:7px">Next collection: <strong>${fmtTruckDate(d)} at ${escapeHTML(x.time)}</strong></div>${x.notes?`<div class="muted small" style="margin-top:5px">${escapeHTML(x.notes)}</div>`:''}</div><span class="pill">${escapeHTML(x.time)}</span></div></div>`;}).join('')||'<div class="empty">No collection schedules have been published yet.</div>';}
+function renderTruckAdminSchedules(){const el=$('truckScheduleAdminList');if(!el)return;el.innerHTML=truckSchedules.map(x=>`<div class="card"><div class="row" style="flex-wrap:wrap"><div style="flex:1"><strong>${escapeHTML(x.route)}</strong><div class="muted small">${escapeHTML(x.type)} · ${weekdayNames[x.weekday]} · ${escapeHTML(x.time)}</div></div><button class="btn danger" type="button" data-delete-truck-schedule="${escapeHTML(x.id)}">Remove</button></div></div>`).join('')||'<div class="empty">No schedules.</div>';}
+$('truckScheduleAdminForm')?.addEventListener('submit',e=>{e.preventDefault();const item={id:'route-'+Date.now(),route:$('truckRouteName').value.trim(),type:$('truckWasteType').value,weekday:Number($('truckWeekday').value),time:$('truckTime').value,notes:$('truckNotes').value.trim(),demo:false};if(!item.route||!item.time)return;truckSchedules.push(item);saveTruckSchedules();e.target.reset();$('truckTime').value='08:00';$('adminMessage').innerHTML='<div class="notice">Schedule added to this browser. To publish it to all residents, connect the shared backend.</div>';});
+$('truckScheduleAdminList')?.addEventListener('click',e=>{const b=e.target.closest('[data-delete-truck-schedule]');if(!b)return;truckSchedules=truckSchedules.filter(x=>x.id!==b.dataset.deleteTruckSchedule);saveTruckSchedules();});
+async function enableTruckReminders(){const status=$('truckReminderStatus'),button=$('enableTruckReminders');if(!('Notification'in window)){status.textContent='This browser does not support notifications.';return;}if(!('serviceWorker'in navigator)){status.textContent='Service workers are not supported in this browser.';return;}if(!window.isSecureContext){status.textContent='Notifications require HTTPS (or localhost during development).';return;}try{const permission=await Notification.requestPermission();if(permission!=='granted'){status.textContent='Notifications were not allowed. You can enable them in browser site settings.';return;}const reg=await navigator.serviceWorker.register('./sw.js');await reg.showNotification('CleanTown reminders enabled',{body:'This device can show CleanTown reminders while permission remains enabled.',icon:'./manifest.webmanifest'});localStorage.setItem('cleantown_truck_reminders_enabled','1');status.textContent='Browser notifications enabled on this device. This demo reminder works when the app is opened; remote delivery to every resident needs server push setup.';button.textContent='✓ Reminders enabled';button.disabled=true;}catch(err){status.textContent='Could not enable notifications: '+(err.message||'Please try again over HTTPS.');}}
+$('enableTruckReminders')?.addEventListener('click',enableTruckReminders);
+function checkTruckReminders(){if(localStorage.getItem('cleantown_truck_reminders_enabled')!=='1'||Notification.permission!=='granted')return;const now=new Date();truckSchedules.forEach(x=>{const next=nextTruckDate(x),reminder=new Date(next.getTime()-24*60*60*1000),key='cleantown_truck_reminded_'+x.id+'_'+next.toISOString().slice(0,10);if(now>=reminder&&now<new Date(reminder.getTime()+60*60*1000)&&!localStorage.getItem(key)){new Notification('Garbage truck arrives tomorrow',{body:`${x.route}: ${x.type} collection at ${x.time}. ${x.notes||'Please prepare your waste for collection.'}`});localStorage.setItem(key,'1');}});}
+renderTruckSchedules();renderTruckAdminSchedules();if(localStorage.getItem('cleantown_truck_reminders_enabled')==='1'&&Notification.permission==='granted'){$('truckReminderStatus').textContent='Notifications are enabled on this device.';$('enableTruckReminders').textContent='✓ Reminders enabled';$('enableTruckReminders').disabled=true;}checkTruckReminders();
+
+function navigate(page){
+document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===page));
+document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+if(page==='tracking')renderTracking();if(page==='hotspots')renderHotspots();if(page==='facilities'){initFacilityMap();}
+}
+window.cleanTownNavigate=navigate;
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.page)));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>navigate(b.dataset.go)));
+$('reportForm').addEventListener('submit',e=>{
+e.preventDefault();const form=new FormData(e.currentTarget),type=form.get('category'),location=String(form.get('location')||'').trim(),details=String(form.get('details')||'').trim();
+const latRaw=String(form.get('lat')||'').trim(),lngRaw=String(form.get('lng')||'').trim();
+const hasLat=latRaw!=='',hasLng=lngRaw!=='';
+if(!location||!details){$('reportMessage').innerHTML='<div class="error">Please enter a location and description.</div>';return;}
+if(hasLat!==hasLng){$('reportMessage').innerHTML='<div class="error">Enter both latitude and longitude, or leave both blank.</div>';return;}
+const lat=hasLat?Number(latRaw):null,lng=hasLng?Number(lngRaw):null;
+if(hasLat&&(!Number.isFinite(lat)||!Number.isFinite(lng)||Math.abs(lat)>90||Math.abs(lng)>180)){$('reportMessage').innerHTML='<div class="error">Please enter valid latitude and longitude values.</div>';return;}
+const next=reports.reduce((m,r)=>Math.max(m,Number((r.id.match(/\d+/)||['100'])[0])),100)+1;const id='CT-'+(cloudMode?(Date.now()+'-'+Math.random().toString(36).slice(2,6)):next);
+const newReport={id,type,location,details,status:'Submitted',time:'Just now',created:Date.now(),...(hasLat?{lat,lng}:{})};reports.unshift(newReport);render();
+$('reportMessage').innerHTML=`<div class="notice"><strong>Report submitted!</strong><br>Your tracking number is <strong>${id}</strong>. ${hasLat?'Your GPS pin is visible on the hotspot map.':'This report has no map pin yet; add coordinates next time.'} ${cloudMode?'Saving to shared database…':'Saved in this browser only until cloud sync is configured.'}</div>`;
+if(cloudMode)cloudSaveReport(newReport).then(()=>{$('reportMessage').innerHTML=`<div class="notice"><strong>Report submitted and synced.</strong><br>Tracking number: <strong>${id}</strong>. Other connected CleanTown devices will receive the update.</div>`;}).catch(()=>{});
+e.currentTarget.reset();$('locationMessage').textContent='';navigate('report');
+});
+$('searchReports').addEventListener('input',renderTracking);$('statusFilter').addEventListener('change',renderTracking);
+document.addEventListener('click',e=>{
+const b=e.target.closest('[data-advance]');if(!b)return;
+const r=reports.find(x=>x.id===b.dataset.advance);if(!r)return;
+r.status=r.status==='Submitted'?'In progress':r.status==='In progress'?'Resolved':'Submitted';
+r.time='Updated just now';render();
+$('adminMessage').innerHTML=`<div class="notice">${escapeHTML(r.id)} updated to <strong>${escapeHTML(r.status)}</strong>. ${cloudMode?'Syncing to shared database…':'Saved in this browser only.'}</div>`;if(cloudMode)cloudSaveReport(r).then(()=>{$('adminMessage').innerHTML=`<div class="notice">${escapeHTML(r.id)} updated to <strong>${escapeHTML(r.status)}</strong> and synced to connected devices.</div>`;}).catch(()=>{});
+});
+const guideItems=[
+{name:'Plastic bottle',icon:'🧴',group:'Recycling',bin:'Plastic recycling',text:'Empty the bottle and rinse if needed. Check local rules and keep it separate from food waste.'},
+{name:'Cardboard box',icon:'📦',group:'Recycling',bin:'Paper and cardboard',text:'Keep cardboard clean and dry. Flatten boxes before placing them in the appropriate recycling bin.'},
+{name:'Food scraps',icon:'🍃',group:'Organic waste',bin:'Food waste / compost',text:'Separate food scraps from recyclables. Use a local composting or organic-waste service if available.'},
+{name:'Used battery',icon:'🔋',group:'Special waste',bin:'Battery collection point',text:'Do not put batteries in ordinary household recycling. Use an authorised battery collection point.'},
+{name:'Glass bottle',icon:'🍾',group:'Recycling',bin:'Glass collection point',text:'Check whether your local programme accepts glass. Keep it separate and handle broken glass safely.'},
+{name:'Used tissue',icon:'🧻',group:'General waste',bin:'General waste',text:'Used tissues are generally not accepted with paper recycling. Follow local waste service guidance.'},
+{name:'Old phone or laptop',icon:'📱',group:'Electrical waste (e-waste)',bin:'Authorised e-waste collection point',text:'Do not put electronic devices in household rubbish or mixed recycling. Use the official Malaysia Department of Environment collection-centre locator linked below, and confirm accepted items before visiting. Back up and remove personal data where possible.'},
+{name:'Old TV or appliance',icon:'📺',group:'Electrical waste (e-waste)',bin:'Authorised e-waste collection point',text:'Televisions, computers, refrigerators, washing machines and other electrical appliances should be handed to a registered or authorised collector. Check the official locator below for a suitable centre and call ahead.'},
+{name:'Fruit and vegetable scraps',icon:'🥬',group:'Food waste',bin:'Compost or organic-waste collection',text:'Separate scraps from packaging. Compost fruit and vegetable peels if you have a suitable compost bin or community service. Mix with dry leaves or shredded uncoated cardboard and cover scraps to help reduce odours and pests.'},
+{name:'Cooked food leftovers',icon:'🍚',group:'Food waste',bin:'Local organic-waste service or designated general waste',text:'Check whether your local composting service accepts cooked food. Basic home composters may attract pests from oily food, meat, fish and dairy. Keep leftovers contained and follow local council rules; never dump food into drains or public spaces.'}
+];
+function renderGuide(){
+const q=$('searchGuide').value.trim().toLowerCase();
+const list=guideItems.filter(x=>(x.name+' '+x.group+' '+x.bin).toLowerCase().includes(q));
+$('guideList').innerHTML=list.map((x,i)=>`<button class="guide-item" data-guide="${escapeHTML(x.name)}"><span style="font-size:25px">${x.icon}</span><strong>${escapeHTML(x.name)}</strong><span class="muted small">${escapeHTML(x.bin)}</span></button>`).join('')||'<div class="empty">No matching items.</div>';
+$('ewasteInfoPanel').classList.add('hidden');
+$('foodWasteInfoPanel').classList.add('hidden');
+$('guideDetail').classList.add('hidden');
+}
+$('searchGuide').addEventListener('input',renderGuide);
+$('guideList').addEventListener('click',e=>{const b=e.target.closest('[data-guide]');if(!b)return;const x=guideItems.find(y=>y.name===b.dataset.guide);if(!x)return;const itemName=String(x.name||'').toLowerCase(),itemGroup=String(x.group||'').toLowerCase();const ewasteSelected=itemGroup.includes('e-waste')||/phone|laptop|tv|appliance|electronic/i.test(itemName);const foodSelected=itemGroup.includes('food')||itemGroup.includes('organic')||/food scraps|fruit and vegetable scraps|cooked food leftovers|food waste|banana peel|coffee grounds|eggshell/i.test(itemName);$('ewasteInfoPanel').classList.toggle('hidden',!ewasteSelected);$('foodWasteInfoPanel').classList.toggle('hidden',!foodSelected);$('guideDetail').classList.remove('hidden');const disposalSteps={
+'Plastic bottle':['Empty the bottle and rinse away food or drink residue.','Check the recycling symbol and your local programme’s accepted plastics.','Place it in the designated plastic-recycling container; keep it separate from food waste.'],
+'Cardboard box':['Remove packing materials and any plastic liners.','Keep the cardboard clean and dry, then flatten it to save space.','Put it in a paper/cardboard recycling bin or take it to a centre that accepts cardboard.'],
+'Food scraps':['Separate scraps from plastic packaging and drain excess liquid.','Compost suitable fruit and vegetable scraps, or use an organic-waste service if available.','For meat, fish, dairy or oily leftovers, check the service’s accepted-items list; otherwise use the designated general-waste route.'],
+'Used battery':['Do not place batteries in ordinary rubbish or mixed recycling.','Keep batteries dry and prevent terminals from touching metal; do not puncture or dismantle them.','Take them to a dedicated battery collection point and ask the collector how to handle swollen or damaged batteries.'],
+'Glass bottle':['Empty and rinse the bottle; remove caps if your local programme asks you to.','Keep glass separate and place it in a glass collection container or a centre that accepts bottles.','Never put loose broken glass into a recycling bin unless the service specifically provides safe instructions.'],
+'Used tissue':['Do not put used tissues in paper recycling because they are contaminated and fibres are unsuitable for many paper-recycling processes.','Put used tissues in the designated general-waste bin.','If contaminated with chemicals or other special waste, follow the relevant local disposal instructions.'],
+'Old phone or laptop':['If it still works, consider reuse, repair or donation before recycling.','Back up your data and sign out, remove accounts and securely erase personal information where possible.','Take it to a DOE-registered/authorised household e-waste collector; confirm acceptance before visiting.'],
+'Old TV or appliance':['Do not leave the appliance beside a bin or dismantle it yourself.','Contact a DOE-registered/authorised e-waste collector or retailer take-back service.','Call ahead to confirm the item is accepted and whether pickup is available, especially for large appliances.'],
+'Fruit and vegetable scraps':['Remove stickers, ties and all plastic packaging.','Use a suitable compost bin or community organic-waste service; mix moist scraps with dry leaves or shredded uncoated cardboard.','Cover fresh scraps to reduce odours and pests, and follow the service’s accepted-items list.'],
+'Cooked food leftovers':['Keep leftovers contained and separate from recyclables.','Check whether your compost or organic-waste service accepts cooked food, meat, fish, dairy and oily items.','If not accepted, use the designated general-waste bin according to local rules; never pour food waste into drains or leave it outdoors.']
+};const steps=disposalSteps[x.name]||[x.text,'Check your local council or recycling provider’s accepted-items guidance.'];$('guideDetail').classList.remove('hidden');$('guideDetail').innerHTML=`<div class="row"><span style="font-size:27px">${x.icon}</span><div><strong>${escapeHTML(x.name)} disposal guidance</strong><div class="muted small">${escapeHTML(x.group)}</div></div></div><p><strong>Suggested destination:</strong> ${escapeHTML(x.bin)}</p><ol class="list small">${steps.map(step=>`<li>${escapeHTML(step)}</li>`).join('')}</ol><div class="actions"><button class="btn" type="button" data-guide-navigate="${escapeHTML(x.name)}">🧭 Find nearest suitable disposal point</button></div><p class="muted small">Facility listings and acceptance rules can change. Confirm the destination accepts your item before travelling.</p>`;});
+function guideMapQuery(item){const n=item.name.toLowerCase(),g=item.group.toLowerCase();if(g.includes('e-waste')||n.includes('appliance')||n.includes('phone')||n.includes('laptop')||n.includes('tv'))return 'DOE registered e-waste collection centre';if(n.includes('battery'))return 'battery recycling collection point';if(g.includes('food')||n.includes('scrap')||n.includes('leftover'))return 'community composting food waste collection';if(n.includes('tissue'))return 'general waste disposal point';return 'recycling centre paper cardboard plastic glass';}
+const visionCategories={
+ paper:{title:'Paper / cardboard',icon:'📦',guide:'Cardboard box',kind:'recycling',advice:'Keep paper and cardboard clean and dry. Flatten cardboard and check the facility accepts paper.'},
+ 'plastic-metal':{title:'Plastic / metal packaging',icon:'🧴',guide:'Plastic bottle',kind:'recycling',advice:'Empty and rinse packaging where practical. Check the local facility accepts that material and resin type.'},
+ glass:{title:'Glass',icon:'🍾',guide:'Glass bottle',kind:'recycling',advice:'Handle carefully. Do not put broken glass into a container unless the facility accepts it safely.'},
+ food:{title:'Food scraps',icon:'🍃',guide:'Fruit and vegetable scraps',kind:'bin',advice:'Use a suitable compost or organic-waste service if available; keep food waste away from recycling.'},
+ battery:{title:'Battery',icon:'🔋',guide:'Used battery',kind:'recycling',advice:'Use a dedicated battery collection point. Do not place batteries in ordinary rubbish or dismantle them.'},
+ ewaste:{title:'Electrical appliance / e-waste',icon:'📱',guide:'Old TV or appliance',kind:'recycling',advice:'Use an authorised e-waste collector and confirm the exact appliance is accepted before travelling.'},
+ general:{title:'General / contaminated waste',icon:'🗑️',guide:'Used tissue',kind:'bin',advice:'Keep it contained and use the designated general-waste service; do not leave waste in drains or public spaces.'},
+ bulky:{title:'Bulky waste',icon:'🛋️',guide:'Old TV or appliance',kind:'bin',advice:'Check township bulky-waste collection arrangements. Do not leave large items beside a bin unless collection is arranged.'},
+ uncertain:{title:'Mixed / uncertain waste',icon:'❓',guide:'Used tissue',kind:'bin',advice:'The category is uncertain. Separate items if safe and ask the local waste provider before disposing of hazardous or electronic items.'}
+};
+let selectedWastePhoto=null;
+$('wastePhoto').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];selectedWastePhoto=f||null;$('wasteVisionResult').classList.add('hidden');if(!f){$('wastePhotoPreviewWrap').classList.add('hidden');return;}if(!f.type.startsWith('image/')){$('wasteVisionMessage').className='error';$('wasteVisionMessage').textContent='Please choose an image file.';selectedWastePhoto=null;return;}if(f.size>12*1024*1024){$('wasteVisionMessage').className='error';$('wasteVisionMessage').textContent='Please choose an image smaller than 12 MB.';selectedWastePhoto=null;return;}const url=URL.createObjectURL(f);$('wastePhotoPreview').src=url;$('wastePhotoPreviewWrap').classList.remove('hidden');$('wasteVisionMessage').className='notice';$('wasteVisionMessage').textContent='Photo selected. Choose Analyse photo to send it to your configured AI service, or select a category manually.';});
+function showWasteResult(key,confidence,source){const x=visionCategories[key]||visionCategories.uncertain;$('wasteManualCategory').value=key in visionCategories?key:'uncertain';const item=guideItems.find(g=>g.name===x.guide)||guideItems[0];$('wasteVisionResult').classList.remove('hidden');$('wasteVisionResult').innerHTML=`<div class="row"><span style="font-size:28px">${x.icon}</span><div><strong>Suggested category: ${escapeHTML(x.title)}</strong><div class="small muted">${source==='ai'?'AI-assisted suggestion':'Resident-selected category'}${Number.isFinite(confidence)?' · confidence '+Math.round(confidence*100)+'%':''}</div></div></div><p>${escapeHTML(x.advice)}</p><p class="small muted">Please verify this suggestion. AI may misclassify dirty, damaged, mixed or hazardous items.</p><div class="actions"><button type="button" class="btn" id="wasteFindFacilityBtn">🧭 Find suitable facility on map</button><button type="button" class="btn secondary" id="wasteOpenGuideBtn">View disposal guide</button></div>`;$('wasteFindFacilityBtn').onclick=()=>openGuideDirections(item);$('wasteOpenGuideBtn').onclick=()=>{const b=[...document.querySelectorAll('[data-guide]')].find(z=>z.dataset.guide===item.name);if(b)b.click();else{$('searchGuide').value=item.name;renderGuide();const next=[...document.querySelectorAll('[data-guide]')].find(z=>z.dataset.guide===item.name);if(next)next.click();}};}
+async function analyseWastePhoto(){if(!selectedWastePhoto){$('wasteVisionMessage').className='error';$('wasteVisionMessage').textContent='Take a photo or choose an image first.';return;}const cfg=window.CLEANTOWN_AI_CONFIG||{};if(!cfg.endpoint){$('wasteVisionMessage').className='error';$('wasteVisionMessage').innerHTML='AI recognition is not configured, so this photo has <strong>not</strong> been classified by AI. Choose a category manually for disposal guidance. Configure a secure server-side endpoint in <code>ai-config.js</code> to enable real recognition.';return;}const btn=$('recognizeWasteBtn');btn.disabled=true;btn.textContent='Analysing…';$('wasteVisionMessage').className='notice';$('wasteVisionMessage').textContent='Sending image to the configured recognition service…';try{const form=new FormData();form.append('image',selectedWastePhoto,selectedWastePhoto.name||'waste-photo.jpg');const response=await fetch(cfg.endpoint,{method:'POST',headers:cfg.publicToken?{'Authorization':'Bearer '+cfg.publicToken}:{},body:form});const data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.error||('Recognition service returned HTTP '+response.status));const raw=String(data.category||data.label||'uncertain').toLowerCase();const aliases={'paper':'paper','cardboard':'paper','paper/cardboard':'paper','plastic':'plastic-metal','metal':'plastic-metal','plastic/metal':'plastic-metal','glass':'glass','food':'food','food waste':'food','organic':'food','battery':'battery','batteries':'battery','e-waste':'ewaste','ewaste':'ewaste','electronic':'ewaste','electronics':'ewaste','electrical appliance':'ewaste','general waste':'general','general':'general','bulky waste':'bulky','bulky':'bulky','mixed':'uncertain','unknown':'uncertain'};const key=aliases[raw]||'uncertain';const confidence=Number(data.confidence);showWasteResult(key,Number.isFinite(confidence)?confidence:undefined,'ai');if(data.item||data.advice){const extra=document.createElement('p');extra.innerHTML='<strong>Model description:</strong> '+escapeHTML(data.item||'Visible waste item')+(data.advice?'<br><strong>AI disposal note:</strong> '+escapeHTML(data.advice):'')+'<br><span class="small muted">Model: '+escapeHTML(data.model||'configured vision model')+'</span>';$('wasteVisionResult').prepend(extra);}$('wasteVisionMessage').className='notice';$('wasteVisionMessage').textContent='AI suggestion ready. Review it before using it; image classification can be wrong.';}catch(err){$('wasteVisionMessage').className='error';$('wasteVisionMessage').textContent='Could not analyse this photo: '+err.message+'. Check the configured endpoint and try again, or choose a category manually.';}finally{btn.disabled=false;btn.textContent='✨ Analyse photo';}}
+$('recognizeWasteBtn').addEventListener('click',analyseWastePhoto);
+$('useManualCategoryBtn').addEventListener('click',()=>{const key=$('wasteManualCategory').value;if(!key){$('wasteVisionMessage').className='error';$('wasteVisionMessage').textContent='Choose a waste category first.';return;}showWasteResult(key,undefined,'manual');$('wasteVisionMessage').className='notice';$('wasteVisionMessage').textContent='Showing guidance for the category you selected. This is not an AI prediction.';});
+function openGuideDirections(item){const n=item.name.toLowerCase(),g=item.group.toLowerCase();let kind='recycling';if(g.includes('food')||n.includes('tissue'))kind='bin';$('facilityTypeFilter').value=kind;facilityGuideContext={name:item.name,query:guideMapQuery(item),kind};navigate('facilities');if(!facilityOrigin){const c=townshipCenters[$('facilityTownshipSelect').value]||townshipCenters.elmina;facilityOrigin={lat:c.lat,lng:c.lng};}searchFacilities().then(()=>{const suitable=facilityRecords.filter(f=>f.kind===kind).sort((a,b)=>a.distance-b.distance);if(suitable.length){selectedFacilityId=suitable[0].id;renderFacilityMap();renderFacilityResults();}const msg=$('facilityMessage');msg.className='notice';msg.textContent='Finding a suitable disposal destination for '+item.name+'. Showing '+(kind==='bin'?'waste-disposal points':'recycling points')+' on this map; choose a result to open directions. '+(kind==='recycling'&&g.includes('e-waste')?'For e-waste, verify that the selected point accepts electrical appliances.':'');});if(navigator.geolocation&&!facilityOrigin){useFacilityLocation();}}
+$('guideDetail').addEventListener('click',e=>{const b=e.target.closest('[data-guide-navigate]');if(!b)return;const item=guideItems.find(x=>x.name===b.dataset.guideNavigate);if(item)openGuideDirections(item);});
+$('exportBtn').addEventListener('click',()=>{
+const rows=[['ID','Category','Location','Description','Status','Time','Latitude','Longitude'],...reports.map(r=>[r.id,r.type,r.location,r.details,r.status,r.time,r.lat??'',r.lng??''])];
+const csv=rows.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');
+const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));const a=document.createElement('a');a.href=url;a.download='cleantown-reports.csv';a.click();URL.revokeObjectURL(url);$('adminMessage').innerHTML='<div class="notice">CSV export created.</div>';
+});
+$('resetBtn').addEventListener('click',()=>{if(cloudMode){$('adminMessage').innerHTML='<div class="error">Reset is disabled while connected to the shared database so resident reports cannot be accidentally erased. Manage records individually instead.</div>';return;}if(!confirm('Reset all reports to the original sample data? This removes reports created in this browser.'))return;reports=seed.map(x=>({...x}));render();$('adminMessage').innerHTML='<div class="notice">Sample data reset.</div>';});
+
+function renderSharedFacilityAdmin(){const el=$('sharedFacilityAdminList');if(!el)return;el.innerHTML=sharedFacilities.map(f=>`<article class="report"><div class="report-top"><div><h3>${escapeHTML(f.name)}</h3><div class="small muted">${f.kind==='bin'?'Public rubbish bin / waste point':'Recycling centre / point'} · ${escapeHTML(f.address)}</div><div class="small muted">${Number(f.lat).toFixed(5)}, ${Number(f.lng).toFixed(5)}${f.verified?' · marked verified':' · not verified'}</div></div><div class="actions"><button class="btn secondary" type="button" data-edit-facility="${escapeHTML(f.id)}">Edit</button><button class="btn danger" type="button" data-delete-facility="${escapeHTML(f.id)}">Remove</button></div></div><div class="small" style="margin-top:8px">${escapeHTML(f.notes||'No extra notes.')}</div></article>`).join('')||'<div class="empty">No shared facilities have been added yet. Add a known facility above after verifying its details.</div>';}
+$('facilityUseMapCenter').addEventListener('click',()=>{const c=townshipCenters.elmina;$('sharedFacilityLat').value=c.lat;$('sharedFacilityLng').value=c.lng;$('sharedFacilityAddress').value=$('sharedFacilityAddress').value||c.name;});
+function resetFacilityEditor(){editingFacilityId=null;$('facilityAdminForm').reset();$('facilitySaveButton').textContent='＋ Add facility to shared directory';$('facilityCancelEdit').style.display='none';}
+$('facilityCancelEdit').addEventListener('click',resetFacilityEditor);
+$('facilityAdminForm').addEventListener('submit',async e=>{e.preventDefault();const facility={name:$('sharedFacilityName').value.trim(),kind:$('sharedFacilityType').value,address:$('sharedFacilityAddress').value.trim(),lat:Number($('sharedFacilityLat').value),lng:Number($('sharedFacilityLng').value),notes:$('sharedFacilityNotes').value.trim()};if(!facility.name||!facility.address||!Number.isFinite(facility.lat)||!Number.isFinite(facility.lng)||Math.abs(facility.lat)>90||Math.abs(facility.lng)>180){$('adminMessage').innerHTML='<div class="error">Enter a name, location and valid latitude/longitude.</div>';return;}if(!cloudMode||!db){$('adminMessage').innerHTML='<div class="error">Connect Supabase first to add or edit a facility in the shared directory. In local-only mode facility changes cannot be shared across devices.</div>';return;}let response;if(editingFacilityId){response=await db.from('cleantown_facilities').update({...facility,updated_at:new Date().toISOString()}).eq('id',editingFacilityId).select().single();}else{response=await db.from('cleantown_facilities').insert(facility).select().single();}const {data,error}=response;if(error){$('adminMessage').innerHTML='<div class="error">Could not save facility: '+escapeHTML(error.message)+'</div>';return;}const updated=rowToFacility(data);const idx=sharedFacilities.findIndex(f=>f.id===updated.id);if(idx>=0)sharedFacilities[idx]=updated;else sharedFacilities.push(updated);resetFacilityEditor();renderSharedFacilityAdmin();if(facilityOrigin){mergeSharedFacilitiesIntoResults();renderFacilityMarkers();renderFacilityResults();}$('adminMessage').innerHTML='<div class="notice">Facility '+(idx>=0?'updated':'added')+' in the shared directory and synced to connected devices. Confirm its location and details before residents rely on it.</div>';});
+$('sharedFacilityAdminList').addEventListener('click',async e=>{const edit=e.target.closest('[data-edit-facility]');if(edit){if(!cloudMode){$('adminMessage').innerHTML='<div class="error">Connect Supabase to edit shared facilities.</div>';return;}const f=sharedFacilities.find(x=>x.id===edit.dataset.editFacility);if(!f)return;editingFacilityId=f.id;$('sharedFacilityName').value=f.name;$('sharedFacilityType').value=f.kind;$('sharedFacilityAddress').value=f.address;$('sharedFacilityLat').value=f.lat;$('sharedFacilityLng').value=f.lng;$('sharedFacilityNotes').value=f.notes||'';$('facilitySaveButton').textContent='Save facility changes';$('facilityCancelEdit').style.display='inline-block';$('facilityAdminForm').scrollIntoView({behavior:'smooth',block:'start'});return;}const b=e.target.closest('[data-delete-facility]');if(!b)return;if(!cloudMode||!db){$('adminMessage').innerHTML='<div class="error">Connect Supabase to remove shared facilities.</div>';return;}if(!confirm('Remove this shared facility from the directory?'))return;const id=b.dataset.deleteFacility;const {error}=await db.from('cleantown_facilities').delete().eq('id',id);if(error){$('adminMessage').innerHTML='<div class="error">Could not remove facility: '+escapeHTML(error.message)+'</div>';return;}sharedFacilities=sharedFacilities.filter(f=>f.id!==id);facilityRecords=facilityRecords.filter(f=>f.id!=='shared/'+id);renderSharedFacilityAdmin();renderFacilityMarkers();renderFacilityResults();$('adminMessage').innerHTML='<div class="notice">Facility removed from the shared directory.</div>';});
+
+renderSharedFacilityAdmin();render();renderGuide();renderHotspots();cloudInit();
+})();
+</script>
+<script>if ("serviceWorker" in navigator && location.protocol.startsWith("http")) { window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {})); }</script>
+
+<script>
+// Demo-only login UI. This does not provide real authentication or authorization.
+(function(){
+  const overlay=document.getElementById('loginOverlay');
+  const form=document.getElementById('loginForm');
+  const email=document.getElementById('loginEmail');
+  const password=document.getElementById('loginPassword');
+  const message=document.getElementById('loginMessage');
+  const logout=document.getElementById('logoutBtn');
+  let role='resident';
+  function showMessage(text,isError){message.className=isError?'login-message error':'login-message';message.textContent=text;}
+  document.querySelectorAll('[data-login-role]').forEach(btn=>btn.addEventListener('click',()=>{
+    role=btn.dataset.loginRole;
+    document.querySelectorAll('[data-login-role]').forEach(b=>{const active=b.dataset.loginRole===role;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active));});
+    document.getElementById('loginTitle').textContent=role==='resident'?'Welcome back':'Management sign in';
+    document.querySelector('.login-subtitle').textContent=role==='resident'?'Sign in to help keep your neighbourhood clean.':'Sign in to manage reports and monitor township waste issues.';
+    message.textContent='';message.className='';
+  }));
+  document.getElementById('togglePassword').addEventListener('click',()=>{
+    const reveal=password.type==='password';password.type=reveal?'text':'password';
+    document.getElementById('togglePassword').textContent=reveal?'Hide':'Show';
+    document.getElementById('togglePassword').setAttribute('aria-label',reveal?'Hide password':'Show password');
+  });
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    if(!email.validity.valid||password.value.length<4){showMessage('Enter a valid email and a password with at least 4 characters.',true);return;}
+    const session={email:email.value.trim(),role,at:new Date().toISOString()};
+    try{sessionStorage.setItem('cleantown_demo_session',JSON.stringify(session));}catch(err){}
+    overlay.style.display='none';document.body.classList.remove('login-locked');
+    logout.style.display='inline-flex';logout.textContent='Sign out · '+(role==='manager'?'Management':'Resident');
+    const node=document.createElement('div');node.className='notice';node.setAttribute('role','status');node.textContent='Signed in to the '+(role==='manager'?'management':'resident')+' demo.';
+    document.querySelector('main').prepend(node);
+    if(role==='manager')window.cleanTownNavigate('admin');else window.cleanTownNavigate('dashboard');
+  });
+  logout.addEventListener('click',()=>{
+    try{sessionStorage.removeItem('cleantown_demo_session');}catch(err){}
+    overlay.style.display='flex';document.body.classList.add('login-locked');logout.style.display='none';
+    form.reset();role='resident';
+    document.querySelectorAll('[data-login-role]').forEach(b=>{const active=b.dataset.loginRole==='resident';b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active));});
+    document.getElementById('loginTitle').textContent='Welcome back';
+    document.querySelector('.login-subtitle').textContent='Sign in to help keep your neighbourhood clean.';
+    message.textContent='';message.className='';
+  });
+  try{
+    const session=JSON.parse(sessionStorage.getItem('cleantown_demo_session')||'null');
+    if(session&&session.email&&session.role){
+      overlay.style.display='none';logout.style.display='inline-flex';logout.textContent='Sign out · '+(session.role==='manager'?'Management':'Resident');
+      if(session.role==='manager')window.cleanTownNavigate('admin');
+    }else document.body.classList.add('login-locked');
+  }catch(err){document.body.classList.add('login-locked');}
+})();
+</script>
+
+</body>
+</html>
